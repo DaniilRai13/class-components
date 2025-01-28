@@ -1,4 +1,7 @@
 import { Component } from 'react'
+import styles from './App.module.scss'
+import Header from './components/Header/Header'
+import Result from './components/Result/Result'
 
 interface IState {
   searchTerm: string
@@ -19,7 +22,12 @@ class App extends Component<{}, IState> {
   }
   render() {
     return (
-      <></>
+      <div className={styles.container}>
+        <Header />
+        <main className={styles.main}>
+          <Result />
+        </main>
+      </div>
     )
   }
 }
