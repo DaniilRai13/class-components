@@ -1,15 +1,15 @@
-import { Component } from "react";
-import styles from './Header.module.scss'
-import Search from "./Search/Search";
-import { ApiResponse } from "../../types/resultAPI.interface";
+import { Component } from 'react';
+import styles from './Header.module.scss';
+import Search from './Search/Search';
+import { ApiResponse } from '../../types/resultAPI.interface';
 
 interface IHeader {
-  onSearchResults: (data: ApiResponse) => void
+  onSearchResults: (data: ApiResponse) => void;
 }
 
 class Header extends Component<IHeader> {
   render() {
-    const { onSearchResults } = this.props
+    const { onSearchResults } = this.props;
     return (
       <header className={styles.header}>
         <div className={styles.logoContainer}>
@@ -17,7 +17,7 @@ class Header extends Component<IHeader> {
         </div>
         <Search onSearchResults={onSearchResults} />
       </header>
-    )
+    );
   }
 }
 

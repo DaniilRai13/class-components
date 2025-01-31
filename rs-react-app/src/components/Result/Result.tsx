@@ -1,14 +1,14 @@
-import { Component } from "react";
-import CardList from "./CardList/CardList";
-import { ApiResponse } from "../../types/resultAPI.interface";
+import { Component } from 'react';
+import CardList from './CardList/CardList';
+import { ApiResponse } from '../../types/resultAPI.interface';
 
 interface IResult {
-  result: ApiResponse | null
+  result: ApiResponse | null;
 }
 
 class Result extends Component<IResult> {
   render() {
-    const { result } = this.props
+    const { result } = this.props;
     return (
       <>
         <div>
@@ -16,7 +16,7 @@ class Result extends Component<IResult> {
           <CardList result={result} />
         </div>
       </>
-    )
+    );
   }
 }
 

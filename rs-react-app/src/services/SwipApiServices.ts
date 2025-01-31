@@ -1,4 +1,4 @@
-import { ApiResponse } from "../types/resultAPI.interface";
+import { ApiResponse } from '../types/resultAPI.interface';
 
 export const SwapiApiServices = {
   get: async (endpoint: string): Promise<ApiResponse> => {
@@ -7,5 +7,5 @@ export const SwapiApiServices = {
       throw new Error(`Wrong: ${response.status}`);
     }
     return await response.json();
-  }
-}
+  },
+};

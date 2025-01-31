@@ -7,7 +7,7 @@ export interface IPeoples {
 export interface IPeople {
   name: string;
   height: string;
-  mass: string
+  mass: string;
 }
 export interface IPlanets {
   count: number;
@@ -18,7 +18,7 @@ export interface IPlanets {
 export interface IPlanet {
   name: string;
   climate: string;
-  terrain: string
+  terrain: string;
 }
 export interface IFilms {
   count: number;
@@ -29,7 +29,7 @@ export interface IFilms {
 export interface IFilm {
   title: string;
   director: string;
-  release_date: string
+  release_date: string;
 }
 export interface ISpecies {
   count: number;
@@ -39,7 +39,7 @@ export interface ISpecies {
 }
 export interface ISpecie {
   name: string;
-  classification: string
+  classification: string;
 }
 export interface IVehicles {
   count: number;
@@ -50,7 +50,7 @@ export interface IVehicles {
 export interface IVehicle {
   name: string;
   model: string;
-  manufacturer: string
+  manufacturer: string;
 }
 export interface IStarships {
   count: number;
@@ -61,7 +61,7 @@ export interface IStarships {
 export interface IStarship {
   name: string;
   model: string;
-  manufacturer: string
+  manufacturer: string;
 }
 export type ApiResponse =
   | IPeoples
