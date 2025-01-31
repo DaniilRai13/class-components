@@ -1,7 +1,9 @@
 import { Component, ChangeEvent } from 'react';
 import styles from './Search.module.scss'
+import { SwapiApiServices } from '../../../services/SwipApiServices';
+import { ApiResponse } from '../../../types/resultAPI.interface';
 interface SearchState {
-  query: string
+  query: string | null
   apiEndpoints: string[]
   filteredEndpoints: string[]
   isLoading: boolean
@@ -10,14 +12,14 @@ interface SearchState {
 }
 
 interface SearchProps {
-  // onSearchResults: (data: any) => void; 
+  onSearchResults: (data: ApiResponse) => void;
 }
 
 class Search extends Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
     super(props);
     this.state = {
-      query: '',
+      query: localStorage.getItem('searchTerm'),
       apiEndpoints: ['people/', 'planets/', 'films/', 'species/', 'vehicles/', 'starships/'],
       filteredEndpoints: ['people/', 'planets/', 'films/', 'species/', 'vehicles/', 'starships/'],
       isFocus: false,
@@ -26,7 +28,10 @@ class Search extends Component<SearchProps, SearchState> {
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
-
+  componentDidMount(): void {
+    if (!this.state.query) return
+    this.handleSearch(this.state.query)
+  }
   handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const query = event.target.value.toLowerCase();
 
@@ -44,7 +49,7 @@ class Search extends Component<SearchProps, SearchState> {
   handleListBlur = () => {
     setTimeout(() => {
       this.setState({ isFocus: false });
-    }, 90);
+    }, 100);
     return
   }
 
@@ -56,19 +61,15 @@ class Search extends Component<SearchProps, SearchState> {
     console.log(endpoint)
     this.setState({ isLoading: true, error: null, query: endpoint });
 
-    // try {
-    //   const response = await fetch(`https://swapi.dev/api/${endpoint}`);
-    //   if (!response.ok) {
-    //     throw new Error(`Ошибка: ${response.status}`);
-    //   }
-    //   const data: ApiResponse = await response.json(); 
+    try {
+      const data = await SwapiApiServices.get(endpoint)
 
-    //   this.props.onSearchResults(data);
-    // } catch (error) {
-    //   this.setState({ error: error instanceof Error ? error.message : 'Неизвестная ошибка' });
-    // } finally {
-    //   this.setState({ isLoading: false });
-    // }
+      this.props.onSearchResults(data);
+    } catch (error) {
+      this.setState({ error: error instanceof Error ? error.message : 'Unknown error' });
+    } finally {
+      this.setState({ isLoading: false });
+    }
   };
 
   render() {
@@ -80,7 +81,7 @@ class Search extends Component<SearchProps, SearchState> {
         <label className={styles.inputContainer}>
           <input
             type="text"
-            value={query}
+            value={query || ''}
             onChange={this.handleInputChange}
             onFocus={this.handleListShow}
             onBlur={this.handleListBlur}
