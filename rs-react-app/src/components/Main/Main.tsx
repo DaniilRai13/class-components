@@ -1,11 +1,18 @@
 import { Component } from "react";
 import styles from './Main.module.scss'
 import Result from "../Result/Result";
-class Main extends Component {
+import { ApiResponse } from "../../types/resultAPI.interface";
+
+interface IMain {
+  result: ApiResponse | null
+}
+
+class Main extends Component<IMain> {
   render() {
+    const { result } = this.props
     return (
       <main className={styles.main}>
-        <Result />
+        <Result result={result} />
       </main>
     )
   }
