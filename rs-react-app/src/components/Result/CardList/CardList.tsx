@@ -23,14 +23,13 @@ class CardList extends Component<ICardList> {
             <h4 className={styles.description}>{itemName} description</h4>
           </div>
           <div className={styles.list}>
-            {result?.results &&
-              (isLoading ? (
-                <Skeleton count={7} />
-              ) : (
-                result.results.map((item, index) => (
-                  <Card key={index} item={item} searchTerm={searchTerm} />
-                ))
-              ))}
+            {isLoading ? (
+              <Skeleton count={7} />
+            ) : (
+              result?.results && result.results.map((item, index) => (
+                <Card key={index} item={item} searchTerm={searchTerm} />
+              ))
+            )}
           </div>
         </div>
       </>
