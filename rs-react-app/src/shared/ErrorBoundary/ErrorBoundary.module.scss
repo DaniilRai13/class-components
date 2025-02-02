@@ -1,0 +1,51 @@
+.errorBoundaryContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  flex-direction: column;
+
+  .errorMessage {
+    padding: 30px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    margin-bottom: 20px;
+    color: white;
+    img {
+      height: 320px;
+      width: auto;
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      letter-spacing: 2px;
+      font-size: 50px;
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: #ff6347;
+
+    }
+
+    button {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      letter-spacing: 1.2px;
+      background-color: #ff6347;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 22px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #c15027;
+      }
+    }
+  }
+}
