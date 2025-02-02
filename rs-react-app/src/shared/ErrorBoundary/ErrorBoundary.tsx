@@ -1,16 +1,19 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-import styles from './ErrorBoundary.module.scss'
+import styles from './ErrorBoundary.module.scss';
 
 interface IErrorBoundaryState {
   hasError: boolean;
   errorInfo: ErrorInfo | null;
 }
 interface IErrorBoundaryProps {
-  error: string
-  children: ReactNode
-  resetError: () => void
+  error: string;
+  children: ReactNode;
+  resetError: () => void;
 }
-class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
+class ErrorBoundary extends Component<
+  IErrorBoundaryProps,
+  IErrorBoundaryState
+> {
   constructor(props: IErrorBoundaryProps) {
     super(props);
     this.state = {
@@ -35,8 +38,8 @@ class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> 
       return (
         <div className={styles.errorBoundaryContainer}>
           <div className={styles.errorMessage}>
-            <img 
-              className={styles.errorBoundaryImage} 
+            <img
+              className={styles.errorBoundaryImage}
               src="https://cdn-icons-png.freepik.com/256/10633/10633319.png?semt=ais_hybrid"
               alt="Error illustration"
             />

@@ -35,30 +35,33 @@ class App extends Component<object, IState> {
       const endpointEdit = endpoint.trim().toLowerCase().split('/')[0];
       localStorageHelper.setToLocalStorage('searchTerm', endpointEdit);
       this.setState({ result: data });
-
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
       this.setState({
         error: errorMessage,
       });
-      throw new Error(errorMessage)
+      throw new Error(errorMessage);
     } finally {
       this.setState({ isLoading: false });
     }
   };
 
   throwError = () => {
-    this.setState({ error: 'Test error' })
+    this.setState({ error: 'Test error' });
     throw new Error('Test error');
   };
 
   resetError = () => {
-    this.setState({ error: null })
-  }
+    this.setState({ error: null });
+  };
 
   render() {
     return (
-      <ErrorBoundary error={this.state.error || ''} resetError={this.resetError}>
+      <ErrorBoundary
+        error={this.state.error || ''}
+        resetError={this.resetError}
+      >
         <div className={styles.container}>
           <Header
             onSearchResults={this.onSearchResults}
@@ -66,7 +69,9 @@ class App extends Component<object, IState> {
           />
           <Main result={this.state.result} isLoading={this.state.isLoading} />
           <Footer />
-          <button className={styles.throwErrorBtn} onClick={this.throwError}>Throw Error</button>
+          <button className={styles.throwErrorBtn} onClick={this.throwError}>
+            Throw Error
+          </button>
         </div>
       </ErrorBoundary>
     );
