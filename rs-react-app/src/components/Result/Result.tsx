@@ -4,16 +4,16 @@ import { ApiResponse } from '../../types/resultAPI.interface';
 
 interface IResult {
   result: ApiResponse | null;
+  isLoading: boolean;
 }
 
 class Result extends Component<IResult> {
   render() {
-    const { result } = this.props;
+    const { result, isLoading } = this.props;
     return (
       <>
         <div>
-          <h2>Result</h2>
-          <CardList result={result} />
+          <CardList result={result} isLoading={isLoading} />
         </div>
       </>
     );

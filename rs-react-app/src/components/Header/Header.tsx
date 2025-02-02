@@ -9,13 +9,13 @@ interface IHeader {
 
 class Header extends Component<IHeader> {
   render() {
-    const { onSearchResults,isLoading } = this.props;
+    const { onSearchResults, isLoading } = this.props;
     return (
       <header className={styles.header}>
         <div className={styles.logoContainer}>
           <img alt="logo" src="https://img.icons8.com/bubbles/512/react.png" />
         </div>
-        <Search onSearchResults={onSearchResults} isLoading={isLoading}/>
+        <Search onSearchResults={onSearchResults} isLoading={isLoading} />
       </header>
     );
   }

@@ -1,19 +1,20 @@
 import { Component } from 'react';
 import { ApiResponse } from '../../../types/resultAPI.interface';
 import Card from './Card/Card';
-import styles from './CardList.module.scss'
+import styles from './CardList.module.scss';
 import { localStorageHelper } from '../../../shared/useLocalStorage';
+import Skeleton from '../../../shared/Skeleton/Skeleton';
 
 interface ICardList {
   result: ApiResponse | null;
+  isLoading: boolean;
 }
 
 class CardList extends Component<ICardList> {
-
   render() {
-    const { result } = this.props;
-    const searchTerm = localStorageHelper.getFromLocalStorage('searchTerm')
-    const itemName = `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
+    const { result, isLoading } = this.props;
+    const searchTerm = localStorageHelper.getFromLocalStorage('searchTerm');
+    const itemName = `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`;
     return (
       <>
         <div className={styles.listContainer}>
@@ -23,8 +24,12 @@ class CardList extends Component<ICardList> {
           </div>
           <div className={styles.list}>
             {result?.results &&
-              result.results.map((item, index) => (
-                <Card key={index} item={item} searchTerm={searchTerm} />
+              (isLoading ? (
+                <Skeleton count={7} />
+              ) : (
+                result.results.map((item, index) => (
+                  <Card key={index} item={item} searchTerm={searchTerm} />
+                ))
               ))}
           </div>
         </div>

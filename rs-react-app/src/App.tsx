@@ -44,7 +44,10 @@ class App extends Component<{}, IState> {
   render() {
     return (
       <div className={styles.container}>
-        <Header onSearchResults={this.onSearchResults} isLoading={this.state.isLoading} />
+        <Header
+          onSearchResults={this.onSearchResults}
+          isLoading={this.state.isLoading}
+        />
         <Main result={this.state.result} isLoading={this.state.isLoading} />
       </div>
     );
