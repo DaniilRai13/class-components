@@ -56,7 +56,6 @@ class App extends Component<object, IState> {
   }
 
   render() {
-    console.log(this.state.error)
     return (
       <ErrorBoundary error={this.state.error || ''} resetError={this.resetError}>
         <div className={styles.container}>
