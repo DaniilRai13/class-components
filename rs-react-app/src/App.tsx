@@ -12,8 +12,8 @@ interface IState {
   error: string | null;
 }
 
-class App extends Component<{}, IState> {
-  constructor(props: {}) {
+class App extends Component<object, IState> {
+  constructor(props: object) {
     super(props);
     this.state = {
       result: null,
