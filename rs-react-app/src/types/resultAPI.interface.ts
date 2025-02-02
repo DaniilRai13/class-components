@@ -29,7 +29,6 @@ export interface IFilms {
 export interface IFilm {
   title: string;
   director: string;
-  release_date: string;
 }
 export interface ISpecies {
   count: number;
