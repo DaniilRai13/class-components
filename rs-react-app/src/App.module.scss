@@ -3,15 +3,15 @@
   padding: 0 80px;
   box-sizing: border-box;
   position: relative;
-
+  height: 100vh;
   .main {
     padding: 60px 0;
   }
 
   .throwErrorBtn {
     position: fixed;
-    right: 30px;
-    bottom: 80px;
+    right: 10px;
+    bottom: 120px;
     background-color: rgb(228, 95, 88);
     color: #ffffff;
     border: none;
