@@ -49,6 +49,7 @@ class App extends Component<object, IState> {
           isLoading={this.state.isLoading}
         />
         <Main result={this.state.result} isLoading={this.state.isLoading} />
+        <button className={styles.throwErrorBtn} onClick={() => { throw new Error('test error') }}>Throw Error</button>
       </div>
     );
   }
