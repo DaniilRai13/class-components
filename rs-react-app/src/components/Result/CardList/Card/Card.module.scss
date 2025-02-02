@@ -1,0 +1,18 @@
+.item {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #757272;
+  box-sizing: border-box;
+
+  .title {
+    flex: 0 0 200px;
+    font-size: 20px;
+    padding: 10px 0;
+    box-sizing: border-box;
+  }
+  .description {
+    flex: 1;
+    font-size: 20px;
+    padding-left: 5px;
+  }
+}
