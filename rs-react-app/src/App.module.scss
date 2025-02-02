@@ -2,7 +2,29 @@
   max-width: 1440px;
   padding: 0 80px;
   box-sizing: border-box;
+  position: relative;
+
   .main {
     padding: 60px 0;
+  }
+
+  .throwErrorBtn {
+    position: fixed;
+    right: 30px;
+    bottom: 80px;
+    background-color: rgb(228, 95, 88);
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.1s linear;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgb(188, 65, 58);
+      }
+    }
   }
 }
