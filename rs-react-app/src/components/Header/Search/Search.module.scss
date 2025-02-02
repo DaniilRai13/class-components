@@ -47,7 +47,7 @@
       max-height: 200px;
       overflow-y: auto;
       background-color: #f9f9f9;
-
+      z-index: 2;
       .item {
         padding: 10px;
         border-bottom: 1px solid #ddd;
