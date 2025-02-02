@@ -6,6 +6,7 @@ import { ApiResponse } from './types/resultAPI.interface';
 import { SwapiApiServices } from './services/SwipApiServices';
 import { localStorageHelper } from './shared/useLocalStorage';
 import ErrorBoundary from './shared/ErrorBoundary/ErrorBoundary';
+import Footer from './components/Footer/Footer';
 
 interface IState {
   result: ApiResponse | null;
@@ -64,6 +65,7 @@ class App extends Component<object, IState> {
             isLoading={this.state.isLoading}
           />
           <Main result={this.state.result} isLoading={this.state.isLoading} />
+          <Footer />
           <button className={styles.throwErrorBtn} onClick={this.throwError}>Throw Error</button>
         </div>
       </ErrorBoundary>
