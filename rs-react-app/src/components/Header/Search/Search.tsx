@@ -61,7 +61,7 @@ class Search extends Component<SearchProps, SearchState> {
   handleListBlur = () => {
     setTimeout(() => {
       this.setState({ isFocus: false });
-    }, 100);
+    }, 200);
   };
 
   handleSearch = async (endpoint: string): Promise<void> => {
