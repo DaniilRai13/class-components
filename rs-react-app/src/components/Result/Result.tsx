@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import CardList from './CardList/CardList';
-import { ApiResponse } from '../../types/resultAPI.interface';
+import { IPeoples } from '../../types/resultAPI.interface';
 
 interface IResult {
-  result: ApiResponse | null;
+  result: IPeoples | null;
   isLoading: boolean;
 }
 

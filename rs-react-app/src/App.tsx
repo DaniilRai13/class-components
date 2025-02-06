@@ -2,14 +2,14 @@ import { Component } from 'react';
 import styles from './App.module.scss';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
-import { ApiResponse } from './types/resultAPI.interface';
 import { SwapiApiServices } from './services/SwipApiServices';
 import { localStorageHelper } from './shared/useLocalStorage';
 import ErrorBoundary from './shared/ErrorBoundary/ErrorBoundary';
 import Footer from './components/Footer/Footer';
+import { IPeoples } from './types/resultAPI.interface';
 
 interface IState {
-  result: ApiResponse | null;
+  result: IPeoples | null;
   isLoading: boolean;
   error: string | null;
 }

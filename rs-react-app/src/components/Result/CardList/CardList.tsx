@@ -1,12 +1,12 @@
 import { Component } from 'react';
-import { ApiResponse } from '../../../types/resultAPI.interface';
 import Card from './Card/Card';
 import styles from './CardList.module.scss';
 import { localStorageHelper } from '../../../shared/useLocalStorage';
 import Skeleton from '../../../shared/Skeleton/Skeleton';
+import { IPeoples } from '../../../types/resultAPI.interface';
 
 interface ICardList {
-  result: ApiResponse | null;
+  result: IPeoples | null;
   isLoading: boolean;
 }
 
