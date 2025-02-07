@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { FC, useCallback, useState } from 'react';
 import styles from './App.module.scss';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -8,74 +8,59 @@ import ErrorBoundary from './shared/ErrorBoundary/ErrorBoundary';
 import Footer from './components/Footer/Footer';
 import { IPeoples } from './types/resultAPI.interface';
 
-interface IState {
-  result: IPeoples | null;
-  isLoading: boolean;
-  error: string | null;
-}
+const App: FC = () => {
+  const [result, setResult] = useState<IPeoples | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-class App extends Component<object, IState> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      result: null,
-      isLoading: false,
-      error: null,
-    };
-  }
-
-  onSearchResults = async (endpoint: string) => {
+  const onSearchResults = useCallback(async (endpoint: string) => {
     if (!endpoint) return;
 
-    this.setState({ isLoading: true });
+    setIsLoading(true);
 
     try {
       const data = await SwapiApiServices.get(endpoint);
 
       const endpointEdit = endpoint.trim().toLowerCase().split('/')[0];
       localStorageHelper.setToLocalStorage('searchTerm', endpointEdit);
-      this.setState({ result: data });
+      setResult(data);
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error ? error.message : 'Unknown error';
-      this.setState({
-        error: errorMessage,
-      });
+      setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
-      this.setState({ isLoading: false });
+      setIsLoading(false);
     }
-  };
+  }, [])
 
-  throwError = () => {
-    this.setState({ error: 'Test error' });
+  const throwError = () => {
+    setError('Test error');
     throw new Error('Test error');
   };
 
-  resetError = () => {
-    this.setState({ error: null });
+  const resetError = () => {
+    setError(null);
   };
 
-  render() {
-    return (
-      <ErrorBoundary
-        error={this.state.error || ''}
-        resetError={this.resetError}
-      >
-        <div className={styles.container}>
-          <Header
-            onSearchResults={this.onSearchResults}
-            isLoading={this.state.isLoading}
-          />
-          <Main result={this.state.result} isLoading={this.state.isLoading} />
-          <Footer />
-          <button className={styles.throwErrorBtn} onClick={this.throwError}>
-            Throw Error
-          </button>
-        </div>
-      </ErrorBoundary>
-    );
-  }
+  return (
+    <ErrorBoundary
+      error={error || ''}
+      resetError={resetError}
+    >
+      <div className={styles.container}>
+        <Header
+          onSearchResults={onSearchResults}
+          isLoading={isLoading}
+        />
+        <Main result={result} isLoading={isLoading} />
+        <Footer />
+        <button className={styles.throwErrorBtn} onClick={throwError}>
+          Throw Error
+        </button>
+      </div>
+    </ErrorBoundary>
+  );
 }
 
 export default App;

@@ -1,112 +1,86 @@
-import { Component, ChangeEvent } from 'react';
+import { ChangeEvent, FC, useState, useEffect } from 'react';
 import styles from './Search.module.scss';
 
-interface SearchState {
-  query: string | null;
-  apiEndpoints: string[];
-  filteredEndpoints: string[];
-  isFocus: boolean;
-  error: string | null;
-}
-
-interface SearchProps {
+interface ISearchProps {
   onSearchResults: (endpoint: string) => void;
   isLoading: boolean;
 }
 
-class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-    this.state = {
-      query: localStorage.getItem('searchTerm'),
-      apiEndpoints: [
-        'people/',
-      ],
-      filteredEndpoints: [
-        'people/',
-      ],
-      isFocus: false,
-      error: null,
-    };
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-  componentDidMount(): void {
-    if (!this.state.query) return;
-    this.handleSearch(this.state.query);
-  }
-  handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
+  const [query, setQuery] = useState<string | null>(localStorage.getItem('searchTerm'));
+  const [apiEndpoints] = useState<string[]>(['people/']);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  console.log(111)
+  useEffect(() => {
+    if (!query) return;
+    handleSearch(query);
+  }, [])
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const query = event.target.value.toLowerCase();
-
-    const filtered = this.state.apiEndpoints.filter((endpoint) =>
-      endpoint.toLowerCase().startsWith(query)
-    );
-
-    this.setState({ query, filteredEndpoints: filtered });
+    setQuery(query)
   };
 
-  handleListShow = (): void => {
-    this.setState({ isFocus: true });
+  const handleListShow = (): void => {
+    setIsFocus(true);
   };
 
-  handleListBlur = () => {
+  const handleListBlur = () => {
     setTimeout(() => {
-      this.setState({ isFocus: false });
+      setIsFocus(false);
     }, 200);
   };
 
-  handleSearch = async (endpoint: string): Promise<void> => {
-    this.setState({ query: endpoint });
+  const handleSearch = async (endpoint: string): Promise<void> => {
     try {
-      this.props.onSearchResults(endpoint);
+      onSearchResults(endpoint);
     } catch (error) {
-      this.setState({
-        error: error instanceof Error ? error.message : 'Unknown error',
-      });
+      setError(
+        error instanceof Error ? error.message : 'Unknown error',
+      );
     }
   };
 
-  render() {
-    const { query, filteredEndpoints, isFocus } = this.state;
-
-    return (
-      <div className={styles.searchContainer}>
-        <div className={styles.apiLabel}>API: https://swapi.dev/api/</div>
-        <label className={styles.inputContainer}>
-          <input
-            type="text"
-            value={query || ''}
-            onChange={this.handleInputChange}
-            onFocus={this.handleListShow}
-            onBlur={this.handleListBlur}
-            placeholder="Начните вводить запрос"
-          />
-          {isFocus && (
-            <div className={styles.list}>
-              {filteredEndpoints.length > 0 ? (
-                filteredEndpoints.map((endpoint, index) => (
-                  <div
-                    key={index}
-                    className={styles.item}
-                    onClick={() => this.handleSearch(endpoint)}
-                  >
-                    {endpoint}
-                  </div>
-                ))
-              ) : (
-                <div>Нет доступных запросов</div>
-              )}
-            </div>
-          )}
-        </label>
-        <button
-          onClick={() => this.handleSearch(this.state.query || '')}
-          disabled={this.props.isLoading}
-        >
-          {this.props.isLoading ? 'Загрузка...' : 'Search'}
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className={styles.searchContainer}>
+      <div className={styles.apiLabel}>API: https://swapi.dev/api/</div>
+      <label className={styles.inputContainer}>
+        <input
+          type="text"
+          value={query || ''}
+          onChange={handleInputChange}
+          onFocus={handleListShow}
+          onBlur={handleListBlur}
+          placeholder="Начните вводить запрос"
+        />
+        {isFocus && (
+          <div className={styles.list}>
+            {apiEndpoints.length > 0 ? (
+              apiEndpoints.map((endpoint, index) => (
+                <div
+                  key={index}
+                  className={styles.item}
+                  onClick={() => handleSearch(endpoint)}
+                >
+                  {endpoint}
+                </div>
+              ))
+            ) : (
+              <div>Нет доступных запросов</div>
+            )}
+          </div>
+        )}
+      </label>
+      <button
+        onClick={() => handleSearch(query || '')}
+        disabled={isLoading}
+      >
+        {isLoading ? 'Loading...' : 'Search'}
+      </button>
+      {error && error}
+    </div>
+  );
 }
 
 export default Search;
