@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Card } from './Card/Card';
 import styles from './CardList.module.scss';
-import { localStorageHelper } from '../../../shared/useLocalStorage';
+import { useLocalStorage } from '../../../shared/useLocalStorage';
 import Skeleton from '../../../shared/Skeleton/Skeleton';
 import { IPeoples } from '../../../types/resultAPI.interface';
 
@@ -11,7 +11,7 @@ interface ICardList {
 }
 
 export const CardList: FC<ICardList> = ({ result, isLoading }) => {
-  const searchTerm = localStorageHelper.getFromLocalStorage('searchTerm');
+  const [searchTerm] = useLocalStorage('searchTerm', '')
   const itemName = searchTerm
     ? `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
     : 'Item';

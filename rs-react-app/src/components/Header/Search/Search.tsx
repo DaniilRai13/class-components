@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, useState, useEffect } from 'react';
 import styles from './Search.module.scss';
+import { useLocalStorage } from '../../../shared/useLocalStorage';
 
 interface ISearchProps {
   onSearchResults: (endpoint: string) => void;
@@ -7,15 +8,18 @@ interface ISearchProps {
 }
 
 const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
-  const [query, setQuery] = useState<string | null>(localStorage.getItem('searchTerm'));
+  const [queryLocalStorage] = useLocalStorage('searchTerm', '');
+  const [query, setQuery] = useState<string>(queryLocalStorage);
   const [apiEndpoints] = useState<string[]>(['people/']);
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  console.log(111)
+
   useEffect(() => {
-    if (!query) return;
-    handleSearch(query);
-  }, [])
+    if (queryLocalStorage) {
+      setQuery(queryLocalStorage);
+      handleSearch(queryLocalStorage);
+    }
+  }, [queryLocalStorage])
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const query = event.target.value.toLowerCase();
@@ -52,7 +56,7 @@ const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
           onChange={handleInputChange}
           onFocus={handleListShow}
           onBlur={handleListBlur}
-          placeholder="Начните вводить запрос"
+          placeholder="Start typing..."
         />
         {isFocus && (
           <div className={styles.list}>
