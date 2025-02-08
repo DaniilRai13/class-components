@@ -1,13 +1,13 @@
 import { FC } from 'react';
-import styles from './Card.module.scss';
+import styles from './ListItem.module.scss';
 import { IPeople } from '../../../../types/resultAPI.interface';
 
-interface ICard {
+interface IListItem {
   item: IPeople;
   searchTerm: string | null;
 }
 
-export const Card: FC<ICard> = ({ item }) => {
+const ListItem: FC<IListItem> = ({ item }) => {
   return (
     <>
       <div className={styles.item}>
@@ -18,5 +18,6 @@ export const Card: FC<ICard> = ({ item }) => {
       </div>
     </>
   );
-}
+};
 
+export default ListItem;

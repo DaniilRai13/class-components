@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Card } from './Card/Card';
+import ListItem from './ListItem/ListItem';
 import styles from './CardList.module.scss';
 import { useLocalStorage } from '../../../shared/useLocalStorage';
 import Skeleton from '../../../shared/Skeleton/Skeleton';
@@ -11,7 +11,7 @@ interface ICardList {
 }
 
 export const CardList: FC<ICardList> = ({ result, isLoading }) => {
-  const [searchTerm] = useLocalStorage('searchTerm', '')
+  const [searchTerm] = useLocalStorage('searchTerm', '');
   const itemName = searchTerm
     ? `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
     : 'Item';
@@ -30,7 +30,11 @@ export const CardList: FC<ICardList> = ({ result, isLoading }) => {
             ) : (
               result?.results &&
               result.results.map((item, index) => (
-                <Card key={index} item={item} searchTerm={searchTerm} />
+                <ListItem
+                  key={index}
+                  item={item}
+                  searchTerm={searchTerm}
+                />
               ))
             )}
           </div>
@@ -40,4 +44,4 @@ export const CardList: FC<ICardList> = ({ result, isLoading }) => {
       )}
     </>
   );
-}
+};
