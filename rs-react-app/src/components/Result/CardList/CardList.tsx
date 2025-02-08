@@ -11,11 +11,11 @@ interface ICardList {
 }
 
 export const CardList: FC<ICardList> = ({ result, isLoading }) => {
-  const [searchTerm] = useLocalStorage('searchTerm', '');
+  const { value: searchTerm } = useLocalStorage('searchTerm');
   const itemName = searchTerm
     ? `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
     : 'Item';
-
+  console.log(searchTerm)
   return (
     <>
       {searchTerm ? (

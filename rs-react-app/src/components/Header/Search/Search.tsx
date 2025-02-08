@@ -8,18 +8,18 @@ interface ISearchProps {
 }
 
 const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
-  const [queryLocalStorage] = useLocalStorage('searchTerm', '');
-  const [query, setQuery] = useState<string>(queryLocalStorage);
+  const { value: searchTerm } = useLocalStorage('searchTerm');
+  const [query, setQuery] = useState<string>('');
   const [apiEndpoints] = useState<string[]>(['people/']);
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (queryLocalStorage) {
-      setQuery(queryLocalStorage);
-      handleSearch(queryLocalStorage);
+    if (searchTerm) {
+      setQuery(searchTerm);
+      handleSearch(searchTerm);
     }
-  }, [queryLocalStorage]);
+  }, [searchTerm]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const query = event.target.value.toLowerCase();
