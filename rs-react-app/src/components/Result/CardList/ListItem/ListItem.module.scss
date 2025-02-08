@@ -3,16 +3,30 @@
   align-items: center;
   border-bottom: 2px solid #757272;
   box-sizing: border-box;
-
+  cursor: pointer;
+  transition: 0.2s all linear;
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.02);
+      background-color: #b0afaf1a;
+    }
+  }
   .title {
-    flex: 0 0 200px;
-    font-size: 20px;
+    flex: 0 0 30%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Courier New", Courier, monospace;
     padding: 10px 0;
     box-sizing: border-box;
+    border-right: 2px solid #757272;
+    color: rgb(41, 135, 217);
   }
   .description {
     flex: 1;
     font-size: 20px;
-    padding-left: 5px;
+    padding-left: 13px;
   }
 }

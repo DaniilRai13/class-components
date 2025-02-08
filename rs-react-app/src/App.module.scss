@@ -17,10 +17,11 @@
     border: none;
     border-radius: 7px;
     padding: 10px 15px;
-    font-size: 18px;
+    font-size: 16px;
+    letter-spacing: .4px;
     cursor: pointer;
     transition: 0.1s linear;
-
+    font-family: "Courier New", Courier, monospace;
     @media (hover: hover) {
       &:hover {
         background-color: rgb(188, 65, 58);
