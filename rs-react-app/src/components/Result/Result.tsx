@@ -15,5 +15,4 @@ export const Result: FC<IResult> = ({ result, isLoading }) => {
       </div>
     </>
   );
-}
-
+};

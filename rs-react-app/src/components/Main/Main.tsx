@@ -14,6 +14,6 @@ const Main: FC<IMain> = ({ result, isLoading }) => {
       <Result result={result} isLoading={isLoading} />
     </main>
   );
-}
+};
 
 export default Main;

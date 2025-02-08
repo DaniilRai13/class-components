@@ -16,6 +16,6 @@ const Header: FC<IHeader> = ({ onSearchResults, isLoading }) => {
       <Search onSearchResults={onSearchResults} isLoading={isLoading} />
     </header>
   );
-}
+};
 
 export default Header;

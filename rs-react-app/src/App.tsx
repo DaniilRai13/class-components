@@ -12,7 +12,7 @@ const App: FC = () => {
   const [result, setResult] = useState<IPeoples | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [_, setQuery] = useLocalStorage('searchTerm', '')
+  const [_, setQuery] = useLocalStorage('searchTerm', '');
 
   const onSearchResults = useCallback(async (endpoint: string) => {
     if (!endpoint) return;
@@ -21,9 +21,9 @@ const App: FC = () => {
 
     try {
       const data = await SwapiApiServices.get(endpoint);
-      console.log(endpoint)
+      console.log(endpoint);
       const endpointEdit = endpoint.trim().toLowerCase().split('/')[0];
-      setQuery(endpointEdit)
+      setQuery(endpointEdit);
       setResult(data);
     } catch (error: unknown) {
       const errorMessage =
@@ -33,7 +33,7 @@ const App: FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [])
+  }, []);
 
   const throwError = () => {
     setError('Test error');
@@ -45,15 +45,9 @@ const App: FC = () => {
   };
 
   return (
-    <ErrorBoundary
-      error={error || ''}
-      resetError={resetError}
-    >
+    <ErrorBoundary error={error || ''} resetError={resetError}>
       <div className={styles.container}>
-        <Header
-          onSearchResults={onSearchResults}
-          isLoading={isLoading}
-        />
+        <Header onSearchResults={onSearchResults} isLoading={isLoading} />
         <Main result={result} isLoading={isLoading} />
         <Footer />
         <button className={styles.throwErrorBtn} onClick={throwError}>
@@ -62,6 +56,6 @@ const App: FC = () => {
       </div>
     </ErrorBoundary>
   );
-}
+};
 
 export default App;

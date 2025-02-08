@@ -19,11 +19,11 @@ const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
       setQuery(queryLocalStorage);
       handleSearch(queryLocalStorage);
     }
-  }, [queryLocalStorage])
+  }, [queryLocalStorage]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const query = event.target.value.toLowerCase();
-    setQuery(query)
+    setQuery(query);
   };
 
   const handleListShow = (): void => {
@@ -40,9 +40,7 @@ const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
     try {
       onSearchResults(endpoint);
     } catch (error) {
-      setError(
-        error instanceof Error ? error.message : 'Unknown error',
-      );
+      setError(error instanceof Error ? error.message : 'Unknown error');
     }
   };
 
@@ -76,15 +74,12 @@ const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
           </div>
         )}
       </label>
-      <button
-        onClick={() => handleSearch(query || '')}
-        disabled={isLoading}
-      >
+      <button onClick={() => handleSearch(query || '')} disabled={isLoading}>
         {isLoading ? 'Loading...' : 'Search'}
       </button>
       {error && error}
     </div>
   );
-}
+};
 
 export default Search;

@@ -1,4 +1,4 @@
-import { IPeople, IPeoples } from "../types/resultAPI.interface";
+import { IPeople, IPeoples } from '../types/resultAPI.interface';
 
 export const SwapiApiServices = {
   get: async (endpoint: string): Promise<IPeoples> => {
@@ -6,7 +6,7 @@ export const SwapiApiServices = {
     if (!response.ok) {
       throw new Error(`HTTP Error ${response.status}`);
     }
-    const data = await response.json()
+    const data = await response.json();
 
     return {
       ...data,
@@ -19,7 +19,7 @@ export const SwapiApiServices = {
         eye_color: item.eye_color,
         birth_year: item.birth_year,
         gender: item.gender,
-      }))
-    }
+      })),
+    };
   },
 };
