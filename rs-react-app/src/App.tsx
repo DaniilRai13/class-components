@@ -9,7 +9,8 @@ import { Route, Routes } from 'react-router';
 import Card from './components/Main/Card/Card';
 
 const App: FC = () => {
-  const { result, isLoading, error, onSearchResults, setError } = useFetchSwap();
+  const { result, isLoading, error, onSearchResults, setError } =
+    useFetchSwap();
 
   const throwError = () => {
     setError('Test error');
@@ -25,14 +26,17 @@ const App: FC = () => {
       <div className={styles.container}>
         <Header onSearchResults={onSearchResults} isLoading={isLoading} />
         <Routes>
-          <Route path='/page:id?' element={<Main
-            result={result}
-            isLoading={isLoading}
-            onSearch={onSearchResults}
-          />}>
-            <Route path='details:id?' element={
-              <Card />
-            } />
+          <Route
+            path="/page:id?"
+            element={
+              <Main
+                result={result}
+                isLoading={isLoading}
+                onSearch={onSearchResults}
+              />
+            }
+          >
+            <Route path="details:id?" element={<Card />} />
           </Route>
         </Routes>
         <Footer />

@@ -18,7 +18,7 @@ export const useFetchSwap = () => {
     try {
       const data = await SwapiApiServices.get(endpoint);
       const endpointEdit = endpoint.trim().toLowerCase().split('/')[0];
-      setLocalStorageValue('searchTerm', endpointEdit)
+      setLocalStorageValue('searchTerm', endpointEdit);
       setResult(data);
     } catch (error: unknown) {
       const errorMessage =
@@ -28,7 +28,7 @@ export const useFetchSwap = () => {
       setIsLoading(false);
     }
   }, []);
-  
+
   const getPeople = useCallback(async (id: number) => {
     if (!id) return;
 
@@ -46,5 +46,13 @@ export const useFetchSwap = () => {
     }
   }, []);
 
-  return { result, isLoading, error, onSearchResults, peopleResult, getPeople, setError };
+  return {
+    result,
+    isLoading,
+    error,
+    onSearchResults,
+    peopleResult,
+    getPeople,
+    setError,
+  };
 };

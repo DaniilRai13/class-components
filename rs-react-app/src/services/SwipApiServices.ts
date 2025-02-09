@@ -2,9 +2,8 @@ import axios from 'axios';
 import { IPeople, IPeoples } from '../types/resultAPI.interface';
 
 const api = axios.create({
-  baseURL: 'https://swapi.dev/api/'
+  baseURL: 'https://swapi.dev/api/',
 });
-
 
 export const SwapiApiServices = {
   get: async (endpoint: string): Promise<IPeoples> => {
@@ -24,13 +23,13 @@ export const SwapiApiServices = {
         })),
       };
     } catch (error) {
-      throw new Error('Bad request')
+      throw new Error('Bad request');
     }
   },
   getPeopleById: async (id: number): Promise<IPeople> => {
     try {
       const response = await api.get(`people/${id}`);
-      const item = response.data
+      const item = response.data;
       return {
         name: item.name,
         height: item.height,
@@ -40,7 +39,7 @@ export const SwapiApiServices = {
         eye_color: item.eye_color,
         birth_year: item.birth_year,
         gender: item.gender,
-      }
+      };
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const { status } = error.response;
@@ -55,5 +54,5 @@ export const SwapiApiServices = {
         throw new Error('Unknown network error');
       }
     }
-  }
+  },
 };

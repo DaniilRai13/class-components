@@ -12,16 +12,16 @@
       border: none;
       border-radius: 5px;
       background-color: rgb(106, 126, 201);
-      color: #FFFFFF;
+      color: #ffffff;
       cursor: pointer;
-      transition: .1s background linear ;
+      transition: 0.1s background linear;
 
-      &:disabled{
+      &:disabled {
         background-color: rgba(153, 169, 226, 0.77);
-        cursor:default;
+        cursor: default;
       }
-      @media (hover:hover){
-        &:hover:not(:disabled){
+      @media (hover: hover) {
+        &:hover:not(:disabled) {
           background-color: rgb(68, 92, 182);
         }
       }

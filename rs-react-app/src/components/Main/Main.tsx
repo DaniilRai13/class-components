@@ -7,13 +7,13 @@ import { Outlet, useSearchParams } from 'react-router';
 interface IMain {
   result: IPeoples | null;
   isLoading: boolean;
-  onSearch: (endpoint: string) => void
+  onSearch: (endpoint: string) => void;
 }
 
 const Main: FC<IMain> = ({ result, isLoading, onSearch }) => {
   const [searchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
-  
+
   useEffect(() => {
     onSearch(`people/?page=${currentPage}`);
   }, []);

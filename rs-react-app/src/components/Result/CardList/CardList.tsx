@@ -15,7 +15,7 @@ export const CardList: FC<ICardList> = ({ result, isLoading }) => {
   const itemName = searchTerm
     ? `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
     : 'Item';
-  console.log(searchTerm)
+
   return (
     <>
       {searchTerm ? (
@@ -30,11 +30,7 @@ export const CardList: FC<ICardList> = ({ result, isLoading }) => {
             ) : (
               result?.results &&
               result.results.map((item, index) => (
-                <ListItem
-                  key={index}
-                  item={item}
-                  searchTerm={searchTerm}
-                />
+                <ListItem key={index} item={item} searchTerm={searchTerm} />
               ))
             )}
           </div>
