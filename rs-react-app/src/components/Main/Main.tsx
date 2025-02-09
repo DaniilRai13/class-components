@@ -41,7 +41,6 @@ const Main: FC<IMain> = ({
         result={result}
         isLoading={isLoading}
         onSearch={onSearch}
-        isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
       {currentDetails && isOpen && <Outlet />}
