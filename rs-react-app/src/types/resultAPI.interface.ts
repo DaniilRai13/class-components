@@ -13,4 +13,5 @@ export interface IPeople {
   eye_color: 'blue';
   birth_year: '19BBY';
   gender: 'male';
+  url: string;
 }

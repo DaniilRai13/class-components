@@ -6,7 +6,7 @@ const api = axios.create({
 });
 
 export const SwapiApiServices = {
-  get: async (endpoint: string): Promise<IPeoples> => {
+  getList: async (endpoint: string): Promise<IPeoples> => {
     try {
       const response = await api.get(endpoint);
       return {
@@ -20,6 +20,7 @@ export const SwapiApiServices = {
           eye_color: item.eye_color,
           birth_year: item.birth_year,
           gender: item.gender,
+          url: item.url,
         })),
       };
     } catch (error) {
@@ -39,6 +40,7 @@ export const SwapiApiServices = {
         eye_color: item.eye_color,
         birth_year: item.birth_year,
         gender: item.gender,
+        url: item.url,
       };
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

@@ -16,7 +16,7 @@ export const useFetchSwap = () => {
     setIsLoading(true);
 
     try {
-      const data = await SwapiApiServices.get(endpoint);
+      const data = await SwapiApiServices.getList(endpoint);
       const endpointEdit = endpoint.trim().toLowerCase().split('/')[0];
       setLocalStorageValue('searchTerm', endpointEdit);
       setResult(data);
