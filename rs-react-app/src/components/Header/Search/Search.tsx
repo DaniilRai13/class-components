@@ -37,6 +37,7 @@ const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
 
   const handleSearch = async (endpoint: string): Promise<void> => {
     try {
+      localStorage.setItem('searchTerm', endpoint)
       onSearchResults(endpoint);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Unknown error');
