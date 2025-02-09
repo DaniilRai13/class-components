@@ -5,7 +5,7 @@ import Main from './components/Main/Main';
 import ErrorBoundary from './shared/ErrorBoundary/ErrorBoundary';
 import Footer from './components/Footer/Footer';
 import { useFetchSwap } from './services/useFetchSwip';
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import Card from './components/Main/Card/Card';
 
 const App: FC = () => {
@@ -44,6 +44,7 @@ const App: FC = () => {
               element={<Card closeDetail={setIsOpen} />}
             />
           </Route>
+          <Route path='*' element={<Navigate to='/404' />} />
         </Routes>
         <Footer />
         <button className={styles.throwErrorBtn} onClick={throwError}>
