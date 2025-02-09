@@ -44,7 +44,7 @@ const App: FC = () => {
               element={<Card closeDetail={setIsOpen} />}
             />
           </Route>
-          <Route path='*' element={<Navigate to='/404' />} />
+          <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
         <Footer />
         <button className={styles.throwErrorBtn} onClick={throwError}>

@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/people/*" element={<App />} />
         <Route path="/" element={<Navigate to="/people" />} />
-        <Route path='*' element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
