@@ -8,7 +8,6 @@ interface IResult {
   result: IPeoples | null;
   isLoading: boolean;
   onSearch: (endpoint: string) => void;
-  isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
 
@@ -16,7 +15,6 @@ export const Result: FC<IResult> = ({
   result,
   isLoading,
   onSearch,
-  isOpen,
   setIsOpen,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
