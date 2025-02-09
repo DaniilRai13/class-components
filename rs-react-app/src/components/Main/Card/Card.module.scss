@@ -1,0 +1,82 @@
+.card {
+  width: 40%;
+
+  .cardInner {
+    border: 2px dotted #728eca;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    .name {
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+      font-weight: 600;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .mainInfo {
+      margin-bottom: 20px;
+
+      .mainTitle {
+        font-size: 18px;
+        color: #a2b029;
+        margin-bottom: 5px;
+      }
+
+      .mainInfoContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        .item {
+          font-size: 15px;
+
+          border-radius: 4px;
+          padding: 3px;
+
+          &:first-child {
+            background-color: #728ecaab;
+          }
+          &:nth-child(2) {
+            background-color: #8675d8ab;
+          }
+          &:nth-child(3) {
+            background-color: #9b55c3ab;
+          }
+          &:nth-child(4) {
+            background-color: #e06969ab;
+          }
+        }
+      }
+    }
+
+    .secondInfo {
+      .secondTitle {
+        font-size: 18px;
+        color: #59b933;
+        margin-bottom: 10px;
+      }
+      .secondInfoContainer {
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 5px;
+        .item {
+          font-size: 14px;
+
+          border-radius: 4px;
+          padding: 3px;
+
+          &:first-child {
+            background-color: #728ecaab;
+          }
+          &:nth-child(2) {
+            background-color: #8675d8ab;
+          }
+          &:nth-child(3) {
+            background-color: #9b55c3ab;
+          }
+        }
+      }
+    }
+  }
+}
