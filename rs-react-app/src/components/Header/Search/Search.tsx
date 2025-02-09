@@ -17,7 +17,6 @@ const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
   useEffect(() => {
     if (searchTerm) {
       setQuery(searchTerm);
-      handleSearch(searchTerm);
     }
   }, [searchTerm]);
 
