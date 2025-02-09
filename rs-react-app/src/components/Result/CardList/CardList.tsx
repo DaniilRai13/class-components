@@ -8,9 +8,10 @@ import { IPeoples } from '../../../types/resultAPI.interface';
 interface ICardList {
   result: IPeoples | null;
   isLoading: boolean;
+  showDetails: (id: string) => void;
 }
 
-export const CardList: FC<ICardList> = ({ result, isLoading }) => {
+export const CardList: FC<ICardList> = ({ result, isLoading, showDetails }) => {
   const { value: searchTerm } = useLocalStorage('searchTerm');
   const itemName = searchTerm
     ? `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
@@ -30,7 +31,12 @@ export const CardList: FC<ICardList> = ({ result, isLoading }) => {
             ) : (
               result?.results &&
               result.results.map((item, index) => (
-                <ListItem key={index} item={item} searchTerm={searchTerm} />
+                <ListItem
+                  key={index}
+                  item={item}
+                  searchTerm={searchTerm}
+                  showDetails={showDetails}
+                />
               ))
             )}
           </div>

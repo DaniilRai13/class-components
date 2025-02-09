@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styles from './App.module.scss';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -11,6 +11,7 @@ import Card from './components/Main/Card/Card';
 const App: FC = () => {
   const { result, isLoading, error, onSearchResults, setError } =
     useFetchSwap();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const throwError = () => {
     setError('Test error');
@@ -33,10 +34,15 @@ const App: FC = () => {
                 result={result}
                 isLoading={isLoading}
                 onSearch={onSearchResults}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
               />
             }
           >
-            <Route path="details:id?" element={<Card />} />
+            <Route
+              path="details:id?"
+              element={<Card closeDetail={setIsOpen} />}
+            />
           </Route>
         </Routes>
         <Footer />
