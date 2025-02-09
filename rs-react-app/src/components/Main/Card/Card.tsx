@@ -1,21 +1,35 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './Card.module.scss';
 import { useSearchParams } from 'react-router';
 import { useFetchSwap } from '../../../services/useFetchSwip';
+import Skeleton from '../../../shared/Skeleton/Skeleton';
 
-const Card: FC<{ closeDetail: (isOpen: boolean) => void }> = ({
-  closeDetail,
-}) => {
+const Card: FC<{ closeDetail: (isOpen: boolean) => void }> = ({ closeDetail }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const detailsId = searchParams.get('details');
   const { getPeople, peopleResult } = useFetchSwap();
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    if (detailsId) getPeople(+detailsId);
+
+    const fetchData = async () => {
+      if (detailsId) {
+        setIsLoading(true);
+        try {
+          await getPeople(+detailsId); // Ожидаем завершения вызова getPeople
+        } catch (error) {
+          console.error("Error fetching data", error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchData(); // Вызываем асинхронную функцию
   }, [detailsId]);
 
   return (
-    <section className={styles.card}>
+    !isLoading ? (<section className={styles.card} >
       <div className={styles.cardInner}>
         <h2 className={styles.name}>{peopleResult?.name}</h2>
         <div className={styles.mainInfo}>
@@ -56,17 +70,12 @@ const Card: FC<{ closeDetail: (isOpen: boolean) => void }> = ({
           </div>
         </div>
       </div>
-      <button
-        onClick={() => {
-          closeDetail(false);
-          setSearchParams((params) => ({
-            ...(params.get('page') ? { page: params.get('page')! } : {}),
-          }));
-        }}
-      >
-        Close Details
-      </button>
-    </section>
+      <button onClick={() => {
+        closeDetail(false)
+        setSearchParams((params) => ({ ...(params.get('page') ? { page: params.get('page')! } : {}) }));
+      }}>Close Details</button>
+    </section >)
+      : <div>Loading....</div>
   );
 };
 
