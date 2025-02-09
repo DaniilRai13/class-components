@@ -5,10 +5,12 @@ import Main from './components/Main/Main';
 import ErrorBoundary from './shared/ErrorBoundary/ErrorBoundary';
 import Footer from './components/Footer/Footer';
 import { useFetchSwap } from './services/useFetchSwip';
+import { Route, Routes } from 'react-router';
+import Card from './components/Main/Card/Card';
 
 const App: FC = () => {
   const { result, isLoading, error, onSearchResults, setError } = useFetchSwap();
-  console.log(result)
+
   const throwError = () => {
     setError('Test error');
     throw new Error('Test error');
@@ -22,7 +24,17 @@ const App: FC = () => {
     <ErrorBoundary error={error || ''} resetError={resetError}>
       <div className={styles.container}>
         <Header onSearchResults={onSearchResults} isLoading={isLoading} />
-        <Main result={result} isLoading={isLoading} />
+        <Routes>
+          <Route path='/page:id?' element={<Main
+            result={result}
+            isLoading={isLoading}
+            onSearch={onSearchResults}
+          />}>
+            <Route path='details:id?' element={
+              <Card />
+            } />
+          </Route>
+        </Routes>
         <Footer />
         <button className={styles.throwErrorBtn} onClick={throwError}>
           Throw Error
