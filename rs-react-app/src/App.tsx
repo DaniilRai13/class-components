@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
-import styles from './App.module.scss';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import ErrorBoundary from './shared/ErrorBoundary/ErrorBoundary';
-import Footer from './components/Footer/Footer';
-import { useFetchSwap } from './services/useFetchSwip';
 import { Navigate, Route, Routes } from 'react-router';
+import styles from './App.module.scss';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
 import Card from './components/Main/Card/Card';
+import Main from './components/Main/Main';
+import { useFetchSwap } from './services/useFetchSwip';
+import ErrorBoundary from './shared/ErrorBoundary/ErrorBoundary';
 
 const App: FC = () => {
   const { result, isLoading, error, onSearchResults, setError } =
@@ -39,10 +39,7 @@ const App: FC = () => {
               />
             }
           >
-            <Route
-              path="details:id?"
-              element={<Card closeDetail={setIsOpen} />}
-            />
+            <Route path="details:id?" element={<Card />} />
           </Route>
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
