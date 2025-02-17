@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import styles from './ListItem.module.scss';
 import { IPeople } from '../../../../types/resultAPI.interface';
+import styles from './ListItem.module.scss';
 
 interface IListItem {
   item: IPeople;
@@ -9,11 +9,13 @@ interface IListItem {
 }
 
 const ListItem: FC<IListItem> = ({ item, showDetails }) => {
-  const id = item.url.split('/')[item.url.split('/').length - 2];
   return (
     <>
-      <div className={styles.item} onClick={() => showDetails(id)}>
-        <div className={styles.title}>{item.name}</div>
+      <div className={styles.item} onClick={() => showDetails(item.id)}>
+        <div className={styles.title}>
+          <input type="checkbox" />
+          {item.name}
+        </div>
         <div className={styles.description}>
           Mass: {item.mass}, Height: {item.height}
         </div>
