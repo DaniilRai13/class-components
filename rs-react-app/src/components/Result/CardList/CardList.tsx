@@ -30,9 +30,9 @@ export const CardList: FC<ICardList> = ({ result, isLoading, showDetails }) => {
               <Skeleton count={7} />
             ) : (
               result?.results &&
-              result.results.map((item, index) => (
+              result.results.map((item) => (
                 <ListItem
-                  key={index}
+                  key={item.url}
                   item={item}
                   searchTerm={searchTerm}
                   showDetails={showDetails}
