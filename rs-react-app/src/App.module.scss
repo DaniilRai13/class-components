@@ -4,6 +4,8 @@
   box-sizing: border-box;
   position: relative;
   height: 100vh;
+  margin: 0 auto;
+
   .main {
     padding: 60px 0;
   }
@@ -22,6 +24,7 @@
     cursor: pointer;
     transition: 0.1s linear;
     font-family: 'Courier New', Courier, monospace;
+
     @media (hover: hover) {
       &:hover {
         background-color: rgb(188, 65, 58);
