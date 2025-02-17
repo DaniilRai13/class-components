@@ -5,13 +5,14 @@ export interface IPeoples {
   results: IPeople[];
 }
 export interface IPeople {
+  id: string;
   name: string;
   height: string;
   mass: string;
-  hair_color: 'blond';
-  skin_color: 'fair';
-  eye_color: 'blue';
-  birth_year: '19BBY';
-  gender: 'male';
+  hair_color: string;
+  skin_color: string;
+  eye_color: string;
+  birth_year: string;
+  gender: string;
   url: string;
 }
