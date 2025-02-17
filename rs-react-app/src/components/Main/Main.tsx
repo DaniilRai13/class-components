@@ -1,51 +1,39 @@
-import { FC, MouseEvent, useEffect } from 'react';
-import styles from './Main.module.scss';
-import { Result } from '../Result/Result';
-import { IPeoples } from '../../types/resultAPI.interface';
-import { Outlet, useSearchParams } from 'react-router';
+import { FC, MouseEvent, useEffect } from 'react'
+import { Outlet, useSearchParams } from 'react-router'
+import { IPeoples } from '../../types/resultAPI.interface'
+import { Result } from '../Result/Result'
+import styles from './Main.module.scss'
 
 interface IMain {
-  result: IPeoples | null;
-  isLoading: boolean;
-  onSearch: (endpoint: string) => void;
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  result: IPeoples | null
+  isLoading: boolean
+  onSearch: (endpoint: string) => void
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
 }
 
-const Main: FC<IMain> = ({
-  result,
-  isLoading,
-  onSearch,
-  isOpen,
-  setIsOpen,
-}) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+const Main: FC<IMain> = ({ result, isLoading, onSearch }) => {
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const currentPage = Number(searchParams.get('page')) || 1;
-  const currentDetails = searchParams.get('details');
+  const currentPage = Number(searchParams.get('page')) || 1
+  const currentDetails = searchParams.get('details')
 
   useEffect(() => {
-    onSearch(`people/?page=${currentPage}`);
-  }, []);
+    onSearch(`people/?page=${currentPage}`)
+  }, [])
 
   const closeDetails = (e: MouseEvent) => {
     if ((e.target as HTMLElement).classList.contains(styles.main)) {
-      setIsOpen(false);
-      setSearchParams({ page: currentPage.toString() });
+      setSearchParams({ page: currentPage.toString() })
     }
-  };
+  }
 
   return (
     <main className={styles.main} onClick={(e) => closeDetails(e)}>
-      <Result
-        result={result}
-        isLoading={isLoading}
-        onSearch={onSearch}
-        setIsOpen={setIsOpen}
-      />
-      {currentDetails && isOpen && <Outlet />}
+      <Result result={result} isLoading={isLoading} onSearch={onSearch} />
+      {currentDetails && <Outlet />}
     </main>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

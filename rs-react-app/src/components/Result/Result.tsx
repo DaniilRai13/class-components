@@ -8,15 +8,9 @@ interface IResult {
   result: IPeoples | null;
   isLoading: boolean;
   onSearch: (endpoint: string) => void;
-  setIsOpen: (isOpen: boolean) => void;
 }
 
-export const Result: FC<IResult> = ({
-  result,
-  isLoading,
-  onSearch,
-  setIsOpen,
-}) => {
+export const Result: FC<IResult> = ({ result, isLoading, onSearch }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const currentPage = Number(searchParams.get('page')) || 1;
@@ -35,7 +29,6 @@ export const Result: FC<IResult> = ({
   };
 
   const showDetails = (detailId: string) => {
-    setIsOpen(true);
     setSearchParams({ page: currentPage.toString(), details: detailId });
   };
 
