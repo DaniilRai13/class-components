@@ -43,7 +43,7 @@ class ErrorBoundary extends Component<
               src="https://cdn-icons-png.freepik.com/256/10633/10633319.png?semt=ais_hybrid"
               alt="Error illustration"
             />
-            <h2>{this.props.error || 'Что-то пошло не так...'}</h2>
+            <h2>{this.props.error || 'Something went wrong!'}</h2>
             <button onClick={() => this.props.resetError()}>Go Back</button>
           </div>
         </div>
