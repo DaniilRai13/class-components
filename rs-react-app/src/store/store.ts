@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { peopleApi } from './people/peopleApi';
 import peopleReducer from './people/peopleSlice';
+import errorReducer from './errorSlice';
+
 export const store = configureStore({
   reducer: {
+    errorReducer: errorReducer,
     people: peopleReducer,
     [peopleApi.reducerPath]: peopleApi.reducer,
   },
