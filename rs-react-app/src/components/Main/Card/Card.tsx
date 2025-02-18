@@ -2,13 +2,21 @@ import { FC } from 'react';
 import { useSearchParams } from 'react-router';
 import styles from './Card.module.scss';
 import { useGetPeopleByIdQuery } from '../../../store/people/peopleApi';
+import { useActions } from '../../hooks/useActions';
 
 const Card: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const detailsId = searchParams.get('details');
-  const { data: people, isLoading } = useGetPeopleByIdQuery(detailsId || '');
+  const { data: people, isFetching, isError } = useGetPeopleByIdQuery(detailsId || '');
+  const { handleError } = useActions()
 
-  return people ? (
+  if (isError) {
+    handleError('Bad request');
+  }
+
+  return isFetching ? (
+    <div>Loading....</div>
+  ) :
     <section className={styles.card}>
       <div className={styles.cardInner}>
         <h2 className={styles.name}>{people?.name}</h2>
@@ -60,9 +68,6 @@ const Card: FC = () => {
         Close Details
       </button>
     </section>
-  ) : isLoading ? (
-    <div>Loading....</div>
-  ) : null;
 };
 
 export default Card;
