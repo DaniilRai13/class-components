@@ -2,7 +2,6 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import Card from './Card';
-import { useFetchSwap } from '../../../services/useFetchSwip';
 
 vi.mock('../../../services/useFetchSwip', () => ({
   useFetchSwap: vi.fn(() => ({
@@ -13,16 +12,12 @@ vi.mock('../../../services/useFetchSwip', () => ({
 
 describe('Card Component', () => {
   it('Displays a loading indicator while fetching data', async () => {
-    const mockGetPeople = vi.fn(() => new Promise(() => {}));
-    (useFetchSwap as any).mockReturnValue({
-      getPeople: mockGetPeople,
-      peopleResult: null,
-    });
+    
 
     render(
       <MemoryRouter initialEntries={['/?details=1']}>
         <Routes>
-          <Route path="/" element={<Card closeDetail={() => {}} />} />
+          <Route path="/" element={<Card />} />
         </Routes>
       </MemoryRouter>
     );
@@ -42,20 +37,17 @@ describe('Card Component', () => {
       eye_color: 'Blue',
     };
 
-    (useFetchSwap as any).mockReturnValue({
-      getPeople: vi.fn(),
-      peopleResult: mockPeopleData,
-    });
-
     render(
       <MemoryRouter initialEntries={['/?details=1']}>
         <Routes>
-          <Route path="/" element={<Card closeDetail={() => {}} />} />
+          <Route path="/" element={<Card />} />
         </Routes>
       </MemoryRouter>
     );
 
-    await waitFor(() => expect(screen.getByText('Luke Skywalker')).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByText('Luke Skywalker')).toBeInTheDocument()
+    );
     expect(screen.getByText(/Male/)).toBeInTheDocument();
     expect(screen.getByText(/172/)).toBeInTheDocument();
   });
@@ -66,11 +58,13 @@ describe('Card Component', () => {
     render(
       <MemoryRouter initialEntries={['/?details=1']}>
         <Routes>
-          <Route path="/" element={<Card closeDetail={closeDetailMock} />} />
+          <Route path="/" element={<Card />} />
         </Routes>
       </MemoryRouter>
     );
-    await waitFor(() => expect(screen.getByText('Luke Skywalker')).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByText('Luke Skywalker')).toBeInTheDocument()
+    );
     const closeButton = screen.getByText(/Close Details/);
     fireEvent.click(closeButton);
 
