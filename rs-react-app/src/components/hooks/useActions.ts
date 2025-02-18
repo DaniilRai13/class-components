@@ -2,10 +2,13 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleMarkedPeoples } from '../../store/people/peopleSlice.ts';
+import { handleError, resetError } from '../../store/errorSlice.ts';
 
 const rootActions = {
   toggleMarkedPeoples,
-};
+  handleError,
+  resetError
+}
 
 export const useActions = () => {
   const dispatch = useDispatch();
