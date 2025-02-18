@@ -1,18 +1,19 @@
-import { ChangeEvent, FC, useState, useEffect } from 'react';
-import styles from './Search.module.scss';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router';
 import { useLocalStorage } from '../../../shared/useLocalStorage';
+import { useLazyGetQueryQuery } from '../../../store/people/peopleApi';
+import { useActions } from '../../hooks/useActions';
+import styles from './Search.module.scss';
 
-interface ISearchProps {
-  onSearchResults: (endpoint: string) => void;
-  isLoading: boolean;
-}
-
-const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
+const Search: FC = () => {
   const { value: searchTerm } = useLocalStorage('searchTerm');
   const [query, setQuery] = useState<string>('');
   const [apiEndpoints] = useState<string[]>(['people/']);
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [trigger, { isFetching }] = useLazyGetQueryQuery();
+  const [, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { handleError } = useActions();
 
   useEffect(() => {
     if (searchTerm) {
@@ -37,12 +38,26 @@ const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
 
   const handleSearch = async (endpoint: string): Promise<void> => {
     try {
+      const result = await trigger(endpoint);
+
+      if (result.error) {
+
+        if ('originalStatus' in result.error && result.error.originalStatus === 404) {
+          throw new Error('Bad request. 404 status');
+        }
+        throw new Error('Something went wrong!');
+      }
+
       localStorage.setItem('searchTerm', endpoint);
-      onSearchResults(endpoint);
+      navigate(query);
+      setSearchParams((prevParams) => ({
+        ...prevParams,
+        page: '1',
+      }));
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Unknown error');
+      handleError(error instanceof Error ? error.message : 'Unknown error');
     }
-  };
+  }
 
   return (
     <div className={styles.searchContainer}>
@@ -74,10 +89,9 @@ const Search: FC<ISearchProps> = ({ isLoading, onSearchResults }) => {
           </div>
         )}
       </label>
-      <button onClick={() => handleSearch(query || '')} disabled={isLoading}>
-        {isLoading ? 'Loading...' : 'Search'}
+      <button onClick={() => handleSearch(query || '')} disabled={isFetching}>
+        {isFetching ? 'Loading...' : 'Search'}
       </button>
-      {error && error}
     </div>
   );
 };
