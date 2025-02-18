@@ -1,62 +1,74 @@
-import { FC } from 'react';
-import { CardList } from './CardList/CardList';
-import { IPeoples } from '../../types/resultAPI.interface';
-import styles from './Result.module.scss';
+import { FC, useEffect } from 'react';
 import { useSearchParams } from 'react-router';
+import { useLocalStorage } from '../../shared/useLocalStorage';
+import { useLazyGetListPeoplesQuery } from '../../store/people/peopleApi';
+import { useActions } from '../hooks/useActions';
+import { CardList } from './CardList/CardList';
+import styles from './Result.module.scss';
 
-interface IResult {
-  result: IPeoples | null;
-  isLoading: boolean;
-  onSearch: (endpoint: string) => void;
-}
-
-export const Result: FC<IResult> = ({ result, isLoading, onSearch }) => {
+export const Result:FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = Number(searchParams.get('page'));
+  const { value: searchTerm } = useLocalStorage('searchTerm');
+  const { handleError } = useActions();
 
-  const currentPage = Number(searchParams.get('page')) || 1;
-
-  const handlePageChange = async (newPage: number, page: string) => {
-    if (page === 'prev' && result?.previous)
-      onSearch(`people/?page=${newPage}`);
-    else if (page === 'next' && result?.next)
-      onSearch(`people/?page=${newPage}`);
+  const handlePageChange = async (newPage: number) => {
     setSearchParams((params) => {
       return {
         page: newPage.toString(),
         ...(params.get('details') ? { details: params.get('details')! } : {}),
-      };
-    });
-  };
+      }
+    })
+  }
+  const [getPeoples, { data: result, isFetching }] = useLazyGetListPeoplesQuery()
 
-  const showDetails = (detailId: string) => {
-    setSearchParams({ page: currentPage.toString(), details: detailId });
-  };
+  useEffect(() => {
+    const fetchListOfPeoples = async () => {
+      try {
+        if (currentPage) {
+          const result = await getPeoples(currentPage)
+          if (result.error) {
+
+            if ('originalStatus' in result.error && result.error.originalStatus === 404) {
+              throw new Error('Bad request. 404 status')
+            }
+            throw new Error('Something went wrong!')
+          }
+        }
+      } catch (error) {
+        handleError(error instanceof Error ? error.message : 'Unknown error')
+      }
+    }
+
+    fetchListOfPeoples()
+  }, [currentPage, handleError, getPeoples])
 
   return (
     <>
-      <div className={styles.result}>
-        <CardList
-          result={result}
-          isLoading={isLoading}
-          showDetails={showDetails}
-        />
+      {currentPage && searchTerm?.includes('people') ? <div className={styles.result}>
+        <CardList result={result}
+          isLoading={isFetching} />
         <div className={styles.navigation}>
           <button
             className={styles.prev}
-            onClick={() => handlePageChange(currentPage - 1, 'prev')}
-            disabled={isLoading || !result?.previous}
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={isFetching || !result?.previous}
           >
             prev
           </button>
           <button
             className={styles.next}
-            onClick={() => handlePageChange(currentPage + 1, 'next')}
-            disabled={isLoading || !result?.next}
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={isFetching || !result?.next}
           >
             next
           </button>
         </div>
       </div>
+        : (
+          <div className={styles.title}>Welcome! Make a request</div>
+        )
+      }
     </>
-  );
-};
+  )
+}
