@@ -1,42 +1,38 @@
-import { FC, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router';
+import { FC } from 'react';
+import { Navigate, Route, Routes, useNavigate } from 'react-router';
 import styles from './App.module.scss';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
+import { useActions } from './components/hooks/useActions';
+import { useTypedSelector } from './components/hooks/useTypedSelector';
 import Card from './components/Main/Card/Card';
 import Main from './components/Main/Main';
-import { useFetchSwap } from './services/useFetchSwip';
 import ErrorBoundary from './shared/ErrorBoundary/ErrorBoundary';
 
 const App: FC = () => {
-  const { result, isLoading, error, onSearchResults, setError } =
-    useFetchSwap();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { errorMessage } = useTypedSelector(({ errorReducer }) => errorReducer);
+  const { handleError, resetError: reset } = useActions();
+  const navigate = useNavigate();
 
   const throwError = () => {
-    setError('Test error');
+    handleError('Test error');
     throw new Error('Test error');
-  };
+  }
 
   const resetError = () => {
-    setError(null);
-  };
+    reset();
+    navigate(-1);
+  }
 
   return (
-    <ErrorBoundary error={error || ''} resetError={resetError}>
+    <ErrorBoundary error={errorMessage || ''} resetError={resetError}>
       <div className={styles.container}>
-        <Header onSearchResults={onSearchResults} isLoading={isLoading} />
+        <Header />
         <Routes>
           <Route
-            path="/page:id?"
+            path="page:id?"
             element={
-              <Main
-                result={result}
-                isLoading={isLoading}
-                onSearch={onSearchResults}
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-              />
+              <Main />
             }
           >
             <Route path="details:id?" element={<Card />} />
