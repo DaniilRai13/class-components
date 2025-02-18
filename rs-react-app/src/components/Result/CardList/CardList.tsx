@@ -1,25 +1,24 @@
 import { FC } from 'react';
-import ListItem from './ListItem/ListItem';
-import styles from './CardList.module.scss';
-import { useLocalStorage } from '../../../shared/useLocalStorage';
 import Skeleton from '../../../shared/Skeleton/Skeleton';
+import { useLocalStorage } from '../../../shared/useLocalStorage';
 import { IPeoples } from '../../../types/resultAPI.interface';
+import styles from './CardList.module.scss';
+import ListItem from './ListItem/ListItem';
 
 interface ICardList {
-  result: IPeoples | null;
+  result: IPeoples | undefined;
   isLoading: boolean;
-  showDetails: (id: string) => void;
 }
 
-export const CardList: FC<ICardList> = ({ result, isLoading, showDetails }) => {
-  const { value: searchTerm } = useLocalStorage('searchTerm');
+export const CardList: FC<ICardList> = ({ isLoading, result }) => {
+  const { value: searchTerm } = useLocalStorage('searchTerm')
   const itemName = searchTerm
     ? `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
     : 'Item';
 
   return (
     <>
-      {searchTerm ? (
+      {searchTerm && (
         <div className={styles.listContainer}>
           <div className={styles.header}>
             <h4 className={styles.name}>{itemName} name</h4>
@@ -34,16 +33,13 @@ export const CardList: FC<ICardList> = ({ result, isLoading, showDetails }) => {
                 <ListItem
                   key={item.url}
                   item={item}
-                  searchTerm={searchTerm}
-                  showDetails={showDetails}
                 />
               ))
             )}
           </div>
         </div>
-      ) : (
-        <div className={styles.title}>Welcome! Make a request</div>
-      )}
+      )
+      }
     </>
   );
 };
