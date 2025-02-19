@@ -1,34 +1,49 @@
-import { FC } from 'react';
-import { IPeople } from '../../../../types/resultAPI.interface';
-import styles from './ListItem.module.scss';
-import { useSearchParams } from 'react-router';
+import { FC, MouseEvent, useRef } from 'react'
+import { useSearchParams } from 'react-router'
+import { IPeople } from '../../../../types/resultAPI.interface'
+import { useActions } from '../../../hooks/useActions'
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
+import styles from './ListItem.module.scss'
 
 interface IListItem {
-  item: IPeople;
+  item: IPeople
 }
 
 const ListItem: FC<IListItem> = ({ item }) => {
-  const [, setSearchParams] = useSearchParams()
+  const [, setSearchParams] = useSearchParams();
+  const ref = useRef<HTMLInputElement>(null);
 
-  const showDetails = (detailId: string) => {
+  const showDetails = (event: MouseEvent<HTMLDivElement>, detailId: string) => {
+    if (event.target === ref.current) return
     setSearchParams((prevParams) => {
-      const newParams = new URLSearchParams(prevParams)
-      newParams.set('details', detailId)
-      return newParams
+      const newParams = new URLSearchParams(prevParams);
+      newParams.set('details', detailId);
+      return newParams;
     })
+  }
+  const { toggleMarkedPeoples } = useActions();
+  const { markedPeoples } = useTypedSelector(({ people }) => people);
+
+  const isChecked = (item: IPeople) => {
+    return markedPeoples.some((markedPeople) => markedPeople.id === item.id);
   }
 
   return (
     <>
-      <div className={styles.item} onClick={() => showDetails(item.id)}>
+      <div className={styles.item} onClick={(e) => showDetails(e, item.id)}>
         <div className={styles.title}>
-          <input type="checkbox" />
+          <input
+            ref={ref}
+            type="checkbox"
+            checked={isChecked(item)}
+            onChange={() => toggleMarkedPeoples(item)}
+          />
           {item.name}
         </div>
         <div className={styles.description}>
           Mass: {item.mass}, Height: {item.height}
         </div>
-      </div>
+      </div >
     </>
   );
 };
