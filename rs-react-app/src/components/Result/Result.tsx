@@ -1,53 +1,17 @@
-import { FC, useEffect } from 'react';
-import { useSearchParams } from 'react-router';
+import { FC } from 'react';
 import { useLocalStorage } from '../../shared/useLocalStorage';
-import { useLazyGetListPeoplesQuery } from '../../store/people/peopleApi';
-import { useActions } from '../hooks/useActions';
 import { CardList } from './CardList/CardList';
 import styles from './Result.module.scss';
+import useResult from './useResult';
 
-export const Result:FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = Number(searchParams.get('page'));
+export const Result: FC = () => {
   const { value: searchTerm } = useLocalStorage('searchTerm');
-  const { handleError } = useActions();
-
-  const handlePageChange = async (newPage: number) => {
-    setSearchParams((params) => {
-      return {
-        page: newPage.toString(),
-        ...(params.get('details') ? { details: params.get('details')! } : {}),
-      }
-    })
-  }
-  const [getPeoples, { data: result, isFetching }] = useLazyGetListPeoplesQuery()
-
-  useEffect(() => {
-    const fetchListOfPeoples = async () => {
-      try {
-        if (currentPage) {
-          const result = await getPeoples(currentPage)
-          if (result.error) {
-
-            if ('originalStatus' in result.error && result.error.originalStatus === 404) {
-              throw new Error('Bad request. 404 status')
-            }
-            throw new Error('Something went wrong!')
-          }
-        }
-      } catch (error) {
-        handleError(error instanceof Error ? error.message : 'Unknown error')
-      }
-    }
-
-    fetchListOfPeoples()
-  }, [currentPage, handleError, getPeoples])
+  const { handlePageChange, isFetching, result, currentPage } = useResult();
 
   return (
     <>
       {currentPage && searchTerm?.includes('people') ? <div className={styles.result}>
-        <CardList result={result}
-          isLoading={isFetching} />
+        <CardList />
         <div className={styles.navigation}>
           <button
             className={styles.prev}
