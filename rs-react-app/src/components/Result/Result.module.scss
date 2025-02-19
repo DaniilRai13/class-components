@@ -11,12 +11,8 @@
     .prev,
     .next {
       padding: 8px 14px;
-      border: none;
       border-radius: 5px;
-      background-color: rgb(106, 126, 201);
-      color: #ffffff;
       cursor: pointer;
-      transition: 0.1s background linear;
 
       &:disabled {
         background-color: rgba(153, 169, 226, 0.77);
@@ -30,4 +26,10 @@
       }
     }
   }
+}
+
+.title {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 0 auto;
+  font-size: 50px;
 }
