@@ -2,10 +2,10 @@ import { FC, MouseEvent, useEffect } from 'react'
 import { Outlet, useSearchParams } from 'react-router'
 import { Result } from '../Result/Result'
 import styles from './Main.module.scss'
+import SelectedItems from './SelectedItems/SelectedItems'
 
 const Main: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-
   const currentPage = Number(searchParams.get('page')) || 1
   const currentDetails = searchParams.get('details')
 
@@ -19,11 +19,14 @@ const Main: FC = () => {
     if (!page) {
       setSearchParams({});
     }
-  },[searchParams, setSearchParams]);
+  }, [searchParams, setSearchParams]);
   return (
     <main className={styles.main} onClick={(e) => closeDetails(e)}>
-      <Result />
-      {currentDetails && <Outlet />}
+      <div className={styles.resultInner}>
+        <Result />
+        {currentDetails && <Outlet />}
+      </div>
+      {searchParams.get('page') && <SelectedItems />}
     </main>
   )
 }
