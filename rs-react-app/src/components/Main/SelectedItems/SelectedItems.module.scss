@@ -1,0 +1,75 @@
+@use '@assets/var.scss' as *;
+
+.selected {
+	margin-top: 40px;
+
+	.header {
+		margin-bottom: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.title {
+			font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+			font-size: 26px;
+			font-weight: 600;
+			padding-bottom: 10px;
+			border-bottom: 2px solid #858484;
+		}
+
+		.buttons {
+			display: flex;
+			gap: 20px;
+
+			.unselect {
+				background-color: $error-color;
+
+				&:disabled {
+					background-color: $error-color-hover;
+				}
+
+				@media (hover:hover) {
+					&:hover {
+						background-color: $error-color-hover;
+					}
+				}
+			}
+
+			.download {
+				background-color: $green-color;
+
+				&:disabled {
+					background-color: $green-color-hover;
+				}
+
+				@media (hover:hover) {
+					&:hover {
+						background-color: $green-color-hover;
+					}
+				}
+			}
+
+			.unselect,
+			.download {
+				font-family: inherit;
+				font-weight: 600;
+
+				&:disabled {
+					cursor: default;
+				}
+			}
+		}
+	}
+
+	.list {
+		width: 70%;
+
+		>div {
+			>div {
+				&:first-child {
+					color: rgb(112, 224, 81);
+				}
+			}
+		}
+	}
+}
