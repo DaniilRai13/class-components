@@ -2,6 +2,7 @@
   width: 40%;
 
   .cardInner {
+    position: relative;
     border: 2px dotted #728eca;
     padding: 10px 15px;
     box-sizing: border-box;
@@ -28,6 +29,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 5px;
+
         .item {
           font-size: 15px;
 
@@ -37,12 +39,15 @@
           &:first-child {
             background-color: #728ecaab;
           }
+
           &:nth-child(2) {
             background-color: #8675d8ab;
           }
+
           &:nth-child(3) {
             background-color: #9b55c3ab;
           }
+
           &:nth-child(4) {
             background-color: #e06969ab;
           }
@@ -56,11 +61,13 @@
         color: #59b933;
         margin-bottom: 10px;
       }
+
       .secondInfoContainer {
         display: flex;
         flex-wrap: wrap;
 
         gap: 5px;
+
         .item {
           font-size: 14px;
 
@@ -70,23 +77,32 @@
           &:first-child {
             background-color: #728ecaab;
           }
+
           &:nth-child(2) {
             background-color: #8675d8ab;
           }
+
           &:nth-child(3) {
             background-color: #9b55c3ab;
           }
         }
       }
     }
+
+    button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      padding: 3px 7px;
+      background-color: #ea65658e;
+      cursor: pointer;
+
+      @media (hover:hover) {
+        &:hover {
+          background-color: #c74949;
+        }
+      }
+    }
   }
-  button {
-    margin-top: 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #ea6565;
-    color: #f1f2f6;
-    padding: 7px 12px;
-    cursor: pointer;
-  }
+
 }
