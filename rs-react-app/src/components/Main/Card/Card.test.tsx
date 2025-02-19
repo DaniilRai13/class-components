@@ -12,8 +12,6 @@ vi.mock('../../../services/useFetchSwip', () => ({
 
 describe('Card Component', () => {
   it('Displays a loading indicator while fetching data', async () => {
-    
-
     render(
       <MemoryRouter initialEntries={['/?details=1']}>
         <Routes>

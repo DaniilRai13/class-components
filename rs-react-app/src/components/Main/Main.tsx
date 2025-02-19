@@ -1,19 +1,19 @@
-import { FC, MouseEvent, useEffect } from 'react'
-import { Outlet, useSearchParams } from 'react-router'
-import { Result } from '../Result/Result'
-import styles from './Main.module.scss'
-import SelectedItems from './SelectedItems/SelectedItems'
+import { FC, MouseEvent, useEffect } from 'react';
+import { Outlet, useSearchParams } from 'react-router';
+import { Result } from '../Result/Result';
+import styles from './Main.module.scss';
+import SelectedItems from './SelectedItems/SelectedItems';
 
 const Main: FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const currentPage = Number(searchParams.get('page')) || 1
-  const currentDetails = searchParams.get('details')
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = Number(searchParams.get('page')) || 1;
+  const currentDetails = searchParams.get('details');
 
   const closeDetails = (e: MouseEvent) => {
     if ((e.target as HTMLElement).classList.contains(styles.main)) {
-      setSearchParams({ page: currentPage.toString() })
+      setSearchParams({ page: currentPage.toString() });
     }
-  }
+  };
   useEffect(() => {
     const page = searchParams.get('page');
     if (!page) {
@@ -28,7 +28,7 @@ const Main: FC = () => {
       </div>
       {searchParams.get('page') && <SelectedItems />}
     </main>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

@@ -1,12 +1,12 @@
-import { FC, MouseEvent, useRef } from 'react'
-import { useSearchParams } from 'react-router'
-import { IPeople } from '../../../../types/resultAPI.interface'
-import { useActions } from '../../../hooks/useActions'
-import { useTypedSelector } from '../../../hooks/useTypedSelector'
-import styles from './ListItem.module.scss'
+import { FC, MouseEvent, useRef } from 'react';
+import { useSearchParams } from 'react-router';
+import { IPeople } from '../../../../types/resultAPI.interface';
+import { useActions } from '../../../hooks/useActions';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import styles from './ListItem.module.scss';
 
 interface IListItem {
-  item: IPeople
+  item: IPeople;
 }
 
 const ListItem: FC<IListItem> = ({ item }) => {
@@ -14,19 +14,19 @@ const ListItem: FC<IListItem> = ({ item }) => {
   const ref = useRef<HTMLInputElement>(null);
 
   const showDetails = (event: MouseEvent<HTMLDivElement>, detailId: string) => {
-    if (event.target === ref.current) return
+    if (event.target === ref.current) return;
     setSearchParams((prevParams) => {
       const newParams = new URLSearchParams(prevParams);
       newParams.set('details', detailId);
       return newParams;
-    })
-  }
+    });
+  };
   const { toggleMarkedPeoples } = useActions();
   const { markedPeoples } = useTypedSelector(({ people }) => people);
 
   const isChecked = (item: IPeople) => {
     return markedPeoples.some((markedPeople) => markedPeople.id === item.id);
-  }
+  };
 
   return (
     <>
@@ -43,7 +43,7 @@ const ListItem: FC<IListItem> = ({ item }) => {
         <div className={styles.description}>
           Mass: {item.mass}, Height: {item.height}
         </div>
-      </div >
+      </div>
     </>
   );
 };

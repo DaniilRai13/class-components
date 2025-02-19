@@ -7,8 +7,12 @@ import styles from './Card.module.scss';
 const Card: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const detailsId = searchParams.get('details');
-  const { data: people, isFetching, isError } = useGetPeopleByIdQuery(detailsId || '');
-  const { handleError } = useActions()
+  const {
+    data: people,
+    isFetching,
+    isError,
+  } = useGetPeopleByIdQuery(detailsId || '');
+  const { handleError } = useActions();
 
   if (isError) {
     handleError('Bad request');
@@ -16,7 +20,7 @@ const Card: FC = () => {
 
   return isFetching ? (
     <div>Loading....</div>
-  ) :
+  ) : (
     <section className={styles.card}>
       <div className={styles.cardInner}>
         <h2 className={styles.name}>{people?.name}</h2>
@@ -68,6 +72,7 @@ const Card: FC = () => {
         </button>
       </div>
     </section>
+  );
 };
 
 export default Card;

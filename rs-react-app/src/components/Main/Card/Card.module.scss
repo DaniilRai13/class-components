@@ -97,12 +97,11 @@
       background-color: #ea65658e;
       cursor: pointer;
 
-      @media (hover:hover) {
+      @media (hover: hover) {
         &:hover {
           background-color: #c74949;
         }
       }
     }
   }
-
 }

@@ -17,24 +17,19 @@ const App: FC = () => {
   const throwError = () => {
     handleError('Test error');
     throw new Error('Test error');
-  }
+  };
 
   const resetError = () => {
     reset();
     navigate(-1);
-  }
+  };
 
   return (
     <ErrorBoundary error={errorMessage || ''} resetError={resetError}>
       <div className={styles.container}>
         <Header />
         <Routes>
-          <Route
-            path="page:id?"
-            element={
-              <Main />
-            }
-          >
+          <Route path="page:id?" element={<Main />}>
             <Route path="details:id?" element={<Card />} />
           </Route>
           <Route path="*" element={<Navigate to="/404" />} />

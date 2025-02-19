@@ -5,14 +5,13 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import styles from './CardList.module.scss';
 import ListItem from './ListItem/ListItem';
 
-
 export const CardList: FC = () => {
-  const { value: searchTerm } = useLocalStorage('searchTerm')
+  const { value: searchTerm } = useLocalStorage('searchTerm');
   const itemName = searchTerm
     ? `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
     : 'Item';
   const { peoples, isLoading } = useTypedSelector(({ people }) => people);
-  
+
   return (
     <>
       {searchTerm && (
@@ -26,17 +25,11 @@ export const CardList: FC = () => {
               <Skeleton count={7} />
             ) : (
               peoples &&
-              peoples.map((item) => (
-                <ListItem
-                  key={item.url}
-                  item={item}
-                />
-              ))
+              peoples.map((item) => <ListItem key={item.url} item={item} />)
             )}
           </div>
         </div>
-      )
-      }
+      )}
     </>
   );
 };

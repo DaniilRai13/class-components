@@ -41,8 +41,10 @@ const Search: FC = () => {
       const result = await trigger(endpoint);
 
       if (result.error) {
-
-        if ('originalStatus' in result.error && result.error.originalStatus === 404) {
+        if (
+          'originalStatus' in result.error &&
+          result.error.originalStatus === 404
+        ) {
           throw new Error('Bad request. 404 status');
         }
         throw new Error('Something went wrong!');
@@ -57,7 +59,7 @@ const Search: FC = () => {
     } catch (error) {
       handleError(error instanceof Error ? error.message : 'Unknown error');
     }
-  }
+  };
 
   return (
     <div className={styles.searchContainer}>
