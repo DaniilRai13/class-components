@@ -1,3 +1,4 @@
+@use '@assets/var.scss' as *;
 .container {
   max-width: 1440px;
   padding: 0 80px;
@@ -14,7 +15,7 @@
     position: fixed;
     right: 10px;
     bottom: 120px;
-    background-color: rgb(228, 95, 88);
+    background-color: $error-color;
     color: #ffffff;
     border: none;
     border-radius: 7px;
@@ -27,8 +28,20 @@
 
     @media (hover: hover) {
       &:hover {
-        background-color: rgb(188, 65, 58);
+        background-color: $error-color-hover;
       }
     }
   }
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
