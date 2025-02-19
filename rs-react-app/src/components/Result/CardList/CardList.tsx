@@ -1,21 +1,18 @@
 import { FC } from 'react';
 import Skeleton from '../../../shared/Skeleton/Skeleton';
 import { useLocalStorage } from '../../../shared/useLocalStorage';
-import { IPeoples } from '../../../types/resultAPI.interface';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import styles from './CardList.module.scss';
 import ListItem from './ListItem/ListItem';
 
-interface ICardList {
-  result: IPeoples | undefined;
-  isLoading: boolean;
-}
 
-export const CardList: FC<ICardList> = ({ isLoading, result }) => {
+export const CardList: FC = () => {
   const { value: searchTerm } = useLocalStorage('searchTerm')
   const itemName = searchTerm
     ? `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
     : 'Item';
-
+  const { peoples, isLoading } = useTypedSelector(({ people }) => people);
+  
   return (
     <>
       {searchTerm && (
@@ -28,8 +25,8 @@ export const CardList: FC<ICardList> = ({ isLoading, result }) => {
             {isLoading ? (
               <Skeleton count={7} />
             ) : (
-              result?.results &&
-              result.results.map((item) => (
+              peoples &&
+              peoples.map((item) => (
                 <ListItem
                   key={item.url}
                   item={item}
