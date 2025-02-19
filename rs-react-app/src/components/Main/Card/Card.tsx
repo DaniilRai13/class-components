@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { useSearchParams } from 'react-router';
-import styles from './Card.module.scss';
 import { useGetPeopleByIdQuery } from '../../../store/people/peopleApi';
 import { useActions } from '../../hooks/useActions';
+import styles from './Card.module.scss';
 
 const Card: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -57,16 +57,16 @@ const Card: FC = () => {
             </div>
           </div>
         </div>
+        <button
+          onClick={() => {
+            setSearchParams((params) => ({
+              ...(params.get('page') ? { page: params.get('page')! } : {}),
+            }));
+          }}
+        >
+          x
+        </button>
       </div>
-      <button
-        onClick={() => {
-          setSearchParams((params) => ({
-            ...(params.get('page') ? { page: params.get('page')! } : {}),
-          }));
-        }}
-      >
-        Close Details
-      </button>
     </section>
 };
 
