@@ -1,3 +1,5 @@
+@use '@assets/var.scss' as *;
+
 .card {
   width: 40%;
 
@@ -7,6 +9,10 @@
     padding: 10px 15px;
     box-sizing: border-box;
     border-radius: 10px;
+
+    &[data-theme='dark'] {
+      background-color: #ffffff46;
+    }
 
     .name {
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
@@ -23,6 +29,10 @@
         font-size: 18px;
         color: #a2b029;
         margin-bottom: 5px;
+
+        &[data-theme='dark'] {
+          color: #d4e165;
+        }
       }
 
       .mainInfoContainer {
@@ -60,6 +70,10 @@
         font-size: 18px;
         color: #59b933;
         margin-bottom: 10px;
+
+        &[data-theme='dark'] {
+          color: #78d951;
+        }
       }
 
       .secondInfoContainer {
