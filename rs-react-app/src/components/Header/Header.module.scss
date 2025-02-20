@@ -1,3 +1,5 @@
+@use '@assets/var.scss' as *;
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -10,6 +12,15 @@
     img {
       width: 80px;
       height: 80px;
+    }
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $tablet-landscape) {
+      align-items: end;
     }
   }
 }

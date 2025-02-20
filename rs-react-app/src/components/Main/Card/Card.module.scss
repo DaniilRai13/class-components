@@ -3,6 +3,11 @@
 .card {
   width: 40%;
 
+  @media (max-width: $desktop-small) {
+    margin-bottom: 25px;
+    width: 60%;
+  }
+
   .cardInner {
     position: relative;
     border: 2px dotted #728eca;

@@ -11,5 +11,10 @@
   .resultInner {
     display: flex;
     gap: 20px;
+
+    @media (max-width: $desktop-small) {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
   }
 }

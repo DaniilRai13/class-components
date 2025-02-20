@@ -13,6 +13,10 @@
     position: relative;
     margin: 0 auto;
 
+    @media (max-width: $tablet-landscape) {
+      padding: 0 40px;
+    }
+
     .main {
       padding: 60px 0;
     }
