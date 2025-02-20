@@ -2,7 +2,7 @@ import { FC, ReactNode, useCallback, useMemo, useState } from 'react';
 import { IThemeValuesTypes, ThemeActionsContext, ThemeValuesContext } from './useTheme';
 
 const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
-	const [theme, setTheme] = useState<IThemeValuesTypes>('dark');
+	const [theme, setTheme] = useState<IThemeValuesTypes>('light');
 	console.log(theme)
 
 	const handleTheme = useCallback((value: IThemeValuesTypes) => {
