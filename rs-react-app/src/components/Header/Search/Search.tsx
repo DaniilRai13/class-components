@@ -4,6 +4,7 @@ import { useLocalStorage } from '../../../shared/useLocalStorage';
 import { useLazyGetQueryQuery } from '../../../store/people/peopleApi';
 import { useActions } from '../../hooks/useActions';
 import styles from './Search.module.scss';
+import { useThemeValues } from '../../../providers/ThemeProvider/useTheme';
 
 const Search: FC = () => {
   const { value: searchTerm } = useLocalStorage('searchTerm');
@@ -14,6 +15,7 @@ const Search: FC = () => {
   const [, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const { handleError } = useActions();
+  const theme = useThemeValues();
 
   useEffect(() => {
     if (searchTerm) {
@@ -63,34 +65,36 @@ const Search: FC = () => {
 
   return (
     <div className={styles.searchContainer}>
-      <div className={styles.apiLabel}>API: https://swapi.dev/api/</div>
-      <label className={styles.inputContainer}>
-        <input
-          type="text"
-          value={query || ''}
-          onChange={handleInputChange}
-          onFocus={handleListShow}
-          onBlur={handleListBlur}
-          placeholder="Start typing..."
-        />
-        {isFocus && (
-          <div className={styles.list}>
-            {apiEndpoints.length > 0 ? (
-              apiEndpoints.map((endpoint, index) => (
-                <div
-                  key={index}
-                  className={styles.item}
-                  onClick={() => handleSearch(endpoint)}
-                >
-                  {endpoint}
-                </div>
-              ))
-            ) : (
-              <div>No queries...</div>
-            )}
-          </div>
-        )}
-      </label>
+      <span>
+        <div className={styles.apiLabel} data-theme={theme === 'light' ? 'light' : 'dark'}>API: https://swapi.dev/api/</div>
+        <label className={styles.inputContainer}>
+          <input
+            type="text"
+            value={query || ''}
+            onChange={handleInputChange}
+            onFocus={handleListShow}
+            onBlur={handleListBlur}
+            placeholder="Start typing..."
+          />
+          {isFocus && (
+            <div className={styles.list}>
+              {apiEndpoints.length > 0 ? (
+                apiEndpoints.map((endpoint, index) => (
+                  <div
+                    key={index}
+                    className={styles.item}
+                    onClick={() => handleSearch(endpoint)}
+                  >
+                    {endpoint}
+                  </div>
+                ))
+              ) : (
+                <div>No queries...</div>
+              )}
+            </div>
+          )}
+        </label>
+      </span>
       <button onClick={() => handleSearch(query || '')} disabled={isFetching}>
         {isFetching ? 'Loading...' : 'Search'}
       </button>
