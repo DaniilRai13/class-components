@@ -15,7 +15,7 @@ const App: FC = () => {
   const { handleError, resetError: reset } = useActions();
   const navigate = useNavigate();
   const theme = useThemeValues()
-  console.log(theme)
+  
   const throwError = () => {
     handleError('Test error');
     throw new Error('Test error');

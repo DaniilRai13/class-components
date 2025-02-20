@@ -4,7 +4,7 @@ import { useThemeValues } from '../../providers/ThemeProvider/useTheme';
 
 const Footer: FC = () => {
   const theme = useThemeValues()
-  console.log(theme)
+  
   return (
     <footer className={styles.footer} data-theme={theme === 'light' ? 'light' : 'dark'}>
       <div className={styles.container}>
