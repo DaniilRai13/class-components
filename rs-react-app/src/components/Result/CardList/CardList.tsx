@@ -21,7 +21,7 @@ export const CardList: FC = () => {
             <h4 className={styles.name} data-theme={theme === 'light' ? 'light' : 'dark'}>{itemName} name</h4>
             <h4 className={styles.description}>{itemName} description</h4>
           </div>
-          <div className={styles.list}>
+          <div className={styles.list} data-theme={theme === 'light' ? 'light' : 'dark'}>
             {isLoading ? (
               <Skeleton count={7} />
             ) : (
