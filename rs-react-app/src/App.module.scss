@@ -1,6 +1,8 @@
 @use '@assets/var.scss' as *;
 
 .app {
+  min-height: 100%;
+
   &[data-theme='dark'] {
     background-color: $bg-theme-light;
     color: #282c34;
