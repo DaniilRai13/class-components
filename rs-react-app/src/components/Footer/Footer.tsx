@@ -1,9 +1,12 @@
 import { FC } from 'react';
 import styles from './Footer.module.scss';
+import { useThemeValues } from '../../providers/ThemeProvider/useTheme';
 
 const Footer: FC = () => {
+  const theme = useThemeValues()
+  console.log(theme)
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} data-theme={theme === 'light' ? 'light' : 'dark'}>
       <div className={styles.container}>
         <p className={styles.text}>© 2025 Rai Daniil. All rights reserved.</p>
         <div className={styles.links}>

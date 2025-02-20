@@ -8,12 +8,14 @@ import { useTypedSelector } from './components/hooks/useTypedSelector';
 import Card from './components/Main/Card/Card';
 import Main from './components/Main/Main';
 import ErrorBoundary from './shared/ErrorBoundary/ErrorBoundary';
+import { useThemeValues } from './providers/ThemeProvider/useTheme';
 
 const App: FC = () => {
   const { errorMessage } = useTypedSelector(({ errorReducer }) => errorReducer);
   const { handleError, resetError: reset } = useActions();
   const navigate = useNavigate();
-
+  const theme = useThemeValues()
+  console.log(theme)
   const throwError = () => {
     handleError('Test error');
     throw new Error('Test error');
@@ -26,18 +28,20 @@ const App: FC = () => {
 
   return (
     <ErrorBoundary error={errorMessage || ''} resetError={resetError}>
-      <div className={styles.container}>
-        <Header />
-        <Routes>
-          <Route path="page:id?" element={<Main />}>
-            <Route path="details:id?" element={<Card />} />
-          </Route>
-          <Route path="*" element={<Navigate to="/404" />} />
-        </Routes>
-        <Footer />
-        <button className={styles.throwErrorBtn} onClick={throwError}>
-          Throw Error
-        </button>
+      <div className={styles.app} data-theme={theme === 'light' ? 'light' : 'dark'}>
+        <div className={styles.container}>
+          <Header />
+          <Routes>
+            <Route path="page:id?" element={<Main />}>
+              <Route path="details:id?" element={<Card />} />
+            </Route>
+            <Route path="*" element={<Navigate to="/404" />} />
+          </Routes>
+          <Footer />
+          <button className={styles.throwErrorBtn} onClick={throwError}>
+            Throw Error
+          </button>
+        </div>
       </div>
     </ErrorBoundary>
   );

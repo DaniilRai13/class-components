@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router';
 import { useGetPeopleByIdQuery } from '../../../store/people/peopleApi';
 import { useActions } from '../../hooks/useActions';
 import styles from './Card.module.scss';
+import { useThemeValues } from '../../../providers/ThemeProvider/useTheme';
 
 const Card: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,6 +14,7 @@ const Card: FC = () => {
     isError,
   } = useGetPeopleByIdQuery(detailsId || '');
   const { handleError } = useActions();
+  const theme = useThemeValues();
 
   if (isError) {
     handleError('Bad request');
@@ -22,10 +24,10 @@ const Card: FC = () => {
     <div>Loading....</div>
   ) : (
     <section className={styles.card}>
-      <div className={styles.cardInner}>
+      <div className={styles.cardInner} data-theme={theme === 'light' ? 'light' : 'dark'}>
         <h2 className={styles.name}>{people?.name}</h2>
         <div className={styles.mainInfo}>
-          <h3 className={styles.mainTitle}>Main Info:</h3>
+          <h3 className={styles.mainTitle} data-theme={theme === 'light' ? 'light' : 'dark'}>Main Info:</h3>
           <div className={styles.mainInfoContainer}>
             <div className={styles.item}>
               <strong>Gender:</strong> {people?.gender}
@@ -45,7 +47,7 @@ const Card: FC = () => {
           </div>
         </div>
         <div className={styles.secondInfo}>
-          <h5 className={styles.secondTitle}>Second Info:</h5>
+          <h5 className={styles.secondTitle} data-theme={theme === 'light' ? 'light' : 'dark'}>Second Info:</h5>
           <div className={styles.secondInfoContainer}>
             <div className={styles.item}>
               <strong>Hair:</strong>
