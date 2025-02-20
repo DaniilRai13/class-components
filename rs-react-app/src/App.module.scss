@@ -1,0 +1,60 @@
+@use '@assets/var.scss' as *;
+
+.app {
+  &[data-theme='dark'] {
+    background-color: $bg-theme-light;
+    color: #282c34;
+  }
+
+  .container {
+    max-width: 1440px;
+    padding: 0 80px;
+    box-sizing: border-box;
+    position: relative;
+    margin: 0 auto;
+
+    @media (max-width: $tablet-landscape) {
+      padding: 0 40px;
+    }
+
+    .main {
+      padding: 60px 0;
+    }
+
+    .throwErrorBtn {
+      position: fixed;
+      right: 10px;
+      bottom: 120px;
+      background-color: $error-color;
+      color: #ffffff;
+      border: none;
+      border-radius: 7px;
+      padding: 10px 15px;
+      font-size: 16px;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      transition: 0.1s linear;
+      font-family: 'Courier New', Courier, monospace;
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: $error-color-hover;
+        }
+      }
+    }
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+
+}

@@ -1,0 +1,20 @@
+@use '@assets/var.scss' as *;
+
+.main {
+  padding: 60px 0;
+  padding-bottom: 130px;
+
+  &[data-theme='dark'] {
+    color: #ffffff;
+  }
+
+  .resultInner {
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: $desktop-small) {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+  }
+}
