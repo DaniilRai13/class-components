@@ -9,8 +9,10 @@ const Header: FC = () => {
       <div className={styles.logoContainer}>
         <img alt="logo" src="https://img.icons8.com/bubbles/512/react.png" />
       </div>
-      <ToggleTheme />
-      <Search />
+      <span>
+        <ToggleTheme />
+        <Search />
+      </span>
     </header>
   );
 };
