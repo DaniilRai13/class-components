@@ -4,6 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/class-components/',
   server: {
     host: '0.0.0.0',
     port: 5001,
