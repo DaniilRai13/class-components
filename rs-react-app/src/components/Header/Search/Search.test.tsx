@@ -26,7 +26,7 @@ describe('Search Component', () => {
   });
 
   it('saves search term to localStorage when search button is clicked', async () => {
-    render(<Search isLoading={false} onSearchResults={mockOnSearchResults} />);
+    render(<Search />);
 
     const input = screen.getByPlaceholderText('Start typing...');
     const button = screen.getByText('Search');
@@ -40,14 +40,14 @@ describe('Search Component', () => {
   it('retrieves search term from localStorage on mount', () => {
     localStorage.setItem('searchTerm', 'Darth Vader');
 
-    render(<Search isLoading={false} onSearchResults={mockOnSearchResults} />);
+    render(<Search />);
 
     const input = screen.getByPlaceholderText('Start typing...');
     expect(input).toHaveValue('Darth Vader');
   });
 
   it('calls onSearchResults when search button is clicked', async () => {
-    render(<Search isLoading={false} onSearchResults={mockOnSearchResults} />);
+    render(<Search />);
 
     const input = screen.getByPlaceholderText('Start typing...');
     const button = screen.getByText('Search');

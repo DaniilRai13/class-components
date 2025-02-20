@@ -24,17 +24,6 @@ describe('Card Component', () => {
   });
 
   it('Correctly displays detailed card data', async () => {
-    const mockPeopleData = {
-      name: 'Luke Skywalker',
-      gender: 'Male',
-      height: '172',
-      mass: '77',
-      birth_year: '19BBY',
-      hair_color: 'Blond',
-      skin_color: 'Fair',
-      eye_color: 'Blue',
-    };
-
     render(
       <MemoryRouter initialEntries={['/?details=1']}>
         <Routes>
