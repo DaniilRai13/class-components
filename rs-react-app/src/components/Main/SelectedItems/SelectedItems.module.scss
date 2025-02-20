@@ -60,6 +60,11 @@
         font-family: inherit;
         font-weight: 600;
 
+        @media (max-width: $tablet) {
+          font-size: 14px;
+          padding: 9px 10px;
+        }
+
         &:disabled {
           cursor: default;
         }
@@ -69,6 +74,10 @@
 
   .list {
     width: 70%;
+
+    @media (max-width: 850px) {
+      width: 100%;
+    }
 
     >div {
       >div {

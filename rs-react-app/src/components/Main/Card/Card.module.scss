@@ -8,6 +8,10 @@
     width: 60%;
   }
 
+  @media (max-width: 850px) {
+    width: 100%;
+  }
+
   .cardInner {
     position: relative;
     border: 2px dotted #728eca;

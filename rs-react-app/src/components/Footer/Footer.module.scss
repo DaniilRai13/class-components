@@ -23,21 +23,25 @@
 
     .text {
       margin: 0;
-      font-size: 14px;
+      font-size: 1rem;
+      font-weight: 600;
     }
 
     .links {
       margin-top: 10px;
 
+      &[data-theme='dark'] {
+        .link {
+          color: #4f59dd;
+        }
+      }
+
       .link {
         color: #61dafb;
         text-decoration: none;
         margin: 0 15px;
-        font-size: 14px;
-
-        &[data-theme='dark'] {
-          color: #6163fb;
-        }
+        font-size: 15px;
+        font-weight: 600;
 
         &:hover {
           text-decoration: underline;
