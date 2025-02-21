@@ -9,7 +9,7 @@ import { useThemeValues } from '../../../providers/ThemeProvider/useTheme';
 export const CardList: FC = () => {
   const { value: searchTerm } = useLocalStorage('searchTerm');
   const itemName = searchTerm
-    ? `${searchTerm?.charAt(0).toUpperCase()}${searchTerm?.slice(1, searchTerm?.length)}`
+    ? `${searchTerm?.split('/')[0].charAt(0).toUpperCase()}${searchTerm?.split('/')[0].slice(1)}`
     : 'Item';
   const { peoples, isLoading } = useTypedSelector(({ people }) => people);
   const theme = useThemeValues()
