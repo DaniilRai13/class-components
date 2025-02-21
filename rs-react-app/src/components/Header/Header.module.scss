@@ -22,5 +22,9 @@
     @media (max-width: $tablet-landscape) {
       align-items: end;
     }
+
+    @media (max-width: $tablet-sm) {
+      align-items: center;
+    }
   }
 }

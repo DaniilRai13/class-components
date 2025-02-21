@@ -17,7 +17,7 @@
   }
 
   .title {
-    flex: 0 0 30%;
+    width: 30%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -33,10 +33,24 @@
       margin-right: 7px;
       width: 20px;
       height: 20px;
+      flex-shrink: 0;
+
+      @media (max-width: 570px) {
+        width: 15px;
+        height: 15px;
+      }
     }
 
     @media (max-width: $desktop-small) {
-      flex: 0 0 40%;
+      width: 40%;
+    }
+
+    @media (max-width: $tablet-sm) {
+      font-size: 15px;
+    }
+
+    @media (max-width: $mobile) {
+      width: 50%;
     }
   }
 
@@ -44,5 +58,9 @@
     flex: 1;
     font-size: 20px;
     padding-left: 13px;
+
+    @media (max-width: $tablet-sm) {
+      font-size: 15px;
+    }
   }
 }

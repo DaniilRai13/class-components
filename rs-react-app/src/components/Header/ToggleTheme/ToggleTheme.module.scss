@@ -3,6 +3,9 @@
 $width: 80px;
 $height: 40px;
 
+$width-sm: 60px;
+$height-sm: 30px;
+
 .toggleTheme {
 	position: relative;
 	width: $width;
@@ -13,6 +16,12 @@ $height: 40px;
 	cursor: pointer;
 	margin-right: 20px;
 
+	@media (max-width: $tablet-sm) {
+		width: $width-sm;
+		height: $height-sm;
+		border-radius: $height-sm;
+	}
+
 	span {
 		position: absolute;
 		top: 0;
@@ -22,6 +31,12 @@ $height: 40px;
 		transform: translateX(0);
 		transition: .2s transform linear;
 		background-color: #f0f0f0;
+
+		@media (max-width: $tablet-sm) {
+			width: $height-sm;
+			height: $height-sm;
+			border-radius: $height-sm;
+		}
 	}
 
 	&[data-theme='dark'] {

@@ -2,11 +2,16 @@
 
 .selected {
   margin-top: 40px;
+  padding: 25px;
 
   &[data-theme='dark'] {
     background-color: #85848487;
-    padding: 25px;
     border-radius: 15px;
+  }
+
+  @media (max-width: $mobile-sm) {
+    padding: 15px;
+    margin-top: 30px;
   }
 
   .header {
@@ -15,17 +20,30 @@
     align-items: center;
     justify-content: space-between;
 
+    @media (max-width: $mobile) {
+      margin-bottom: 20px;
+    }
+
     .title {
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
       font-size: 26px;
       font-weight: 600;
       padding-bottom: 10px;
       border-bottom: 2px solid #858484;
+
+      @media (max-width: $mobile) {
+        font-size: 20px;
+      }
     }
 
     .buttons {
       display: flex;
       gap: 20px;
+
+      @media (max-width: $mobile-sm) {
+        flex-direction: column;
+        gap: 7px;
+      }
 
       .unselect {
         background-color: $error-color;
@@ -63,6 +81,11 @@
         @media (max-width: $tablet) {
           font-size: 14px;
           padding: 9px 10px;
+        }
+
+        @media (max-width: $mobile) {
+          font-size: 12px;
+          padding: 7px 8px;
         }
 
         &:disabled {

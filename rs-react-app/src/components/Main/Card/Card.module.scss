@@ -29,6 +29,10 @@
       font-weight: 600;
       font-size: 22px;
       margin-bottom: 10px;
+
+      @media (max-width: $tablet-sm) {
+        font-size: 20px;
+      }
     }
 
     .mainInfo {
@@ -41,6 +45,10 @@
 
         &[data-theme='dark'] {
           color: #d4e165;
+        }
+
+        @media (max-width: $tablet-sm) {
+          font-size: 16px;
         }
       }
 
@@ -83,17 +91,19 @@
         &[data-theme='dark'] {
           color: #78d951;
         }
+
+        @media (max-width: $tablet-sm) {
+          font-size: 16px;
+        }
       }
 
       .secondInfoContainer {
         display: flex;
         flex-wrap: wrap;
-
         gap: 5px;
 
         .item {
           font-size: 14px;
-
           border-radius: 4px;
           padding: 3px;
 

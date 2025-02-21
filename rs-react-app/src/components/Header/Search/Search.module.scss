@@ -9,6 +9,10 @@
     align-items: end;
   }
 
+  @media (max-width: $mobile) {
+    flex-direction: column;
+  }
+
   span {
     display: flex;
     align-items: center;
@@ -22,6 +26,10 @@
       &[data-theme='dark'] {
         color: #ffffff;
       }
+    }
+
+    @media (max-width: $tablet-sm) {
+      width: 160px;
     }
 
     .apiLabel {
@@ -49,6 +57,10 @@
       position: relative;
       margin-right: 15px;
 
+      @media (max-width: $mobile) {
+        margin-right: 0;
+      }
+
       input {
         padding: 10px 15px;
         font-size: 1rem;
@@ -58,6 +70,10 @@
         max-width: 300px;
         box-sizing: border-box;
         transition: border-color 0.3s ease;
+
+        @media (max-width: $mobile) {
+          margin-bottom: 5px;
+        }
 
         &:focus {
           border-color: #007bff;
@@ -103,6 +119,10 @@
   }
 
   button {
+    @media (max-width: $tablet-sm) {
+      width: 100%;
+    }
+
     &:hover {
       background-color: $primary-color-hover;
     }
