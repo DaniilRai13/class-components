@@ -17,10 +17,9 @@
   }
 
   .title {
+    display: flex;
+    align-items: center;
     width: 30%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
     font-size: 18px;
     font-weight: 600;
     font-family: 'Courier New', Courier, monospace;
@@ -29,6 +28,13 @@
     border-right: 2px solid #757272;
     color: rgb(41, 135, 217);
 
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
     input {
       margin-right: 7px;
       width: 20px;
@@ -36,8 +42,8 @@
       flex-shrink: 0;
 
       @media (max-width: 570px) {
-        width: 15px;
-        height: 15px;
+        width: 18px;
+        height: 18px;
       }
     }
 

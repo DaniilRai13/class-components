@@ -83,11 +83,6 @@
           padding: 9px 10px;
         }
 
-        @media (max-width: $mobile) {
-          font-size: 12px;
-          padding: 7px 8px;
-        }
-
         &:disabled {
           cursor: default;
         }
