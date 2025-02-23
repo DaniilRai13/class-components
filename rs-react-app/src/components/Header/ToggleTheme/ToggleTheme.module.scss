@@ -1,0 +1,52 @@
+@use '@assets/var.scss' as *;
+
+$width: 80px;
+$height: 40px;
+
+$width-sm: 60px;
+$height-sm: 30px;
+
+.toggleTheme {
+	position: relative;
+	width: $width;
+	height: $height;
+	border-radius: $height;
+	border: 1px solid #dfb281;
+	background-color: $bg-theme-light;
+	cursor: pointer;
+	margin-right: 20px;
+
+	@media (max-width: $tablet-sm) {
+		width: $width-sm;
+		height: $height-sm;
+		border-radius: $height-sm;
+	}
+
+	span {
+		position: absolute;
+		top: 0;
+		width: $height;
+		height: $height;
+		border-radius: $height;
+		transform: translateX(0);
+		transition: .2s transform linear;
+		background-color: #f0f0f0;
+
+		@media (max-width: $tablet-sm) {
+			width: $height-sm;
+			height: $height-sm;
+			border-radius: $height-sm;
+		}
+	}
+
+	&[data-theme='dark'] {
+		background-color: $bg-theme-dark;
+
+		span {
+			top: 0;
+			transform: translateX(100%);
+			background-color: $bg-theme-light;
+			transition: .2s transform linear;
+		}
+	}
+}
