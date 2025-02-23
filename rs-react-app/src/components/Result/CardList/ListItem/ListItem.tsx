@@ -38,7 +38,7 @@ const ListItem: FC<IListItem> = ({ item }) => {
             checked={isChecked(item)}
             onChange={() => toggleMarkedPeoples(item)}
           />
-          {item.name}
+          <span>{item.name}</span>
         </div>
         <div className={styles.description}>
           Mass: {item.mass}, Height: {item.height}
