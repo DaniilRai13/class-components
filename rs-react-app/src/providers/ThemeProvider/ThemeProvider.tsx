@@ -3,7 +3,6 @@ import { IThemeValuesTypes, ThemeActionsContext, ThemeValuesContext } from './us
 
 const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const [theme, setTheme] = useState<IThemeValuesTypes>('light');
-	console.log(theme)
 
 	const handleTheme = useCallback((value: IThemeValuesTypes) => {
 		setTheme(value)
