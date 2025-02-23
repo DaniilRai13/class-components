@@ -15,6 +15,7 @@ const ToggleTheme: FC = () => {
 		<div
 			className={styles.toggleTheme}
 			onClick={toggleTheme}
+			role='button'
 			data-theme={theme === 'light' ? 'light' : 'dark'}
 		>
 			<span></span>
