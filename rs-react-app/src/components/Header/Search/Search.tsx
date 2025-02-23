@@ -52,7 +52,7 @@ const Search: FC = () => {
         throw new Error('Something went wrong!');
       }
 
-      localStorage.setItem('searchTerm', endpoint);
+      localStorage.setItem('searchTerm', endpoint.toLowerCase());
       navigate(query);
       setSearchParams((prevParams) => ({
         ...prevParams,
