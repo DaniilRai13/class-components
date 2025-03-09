@@ -1,19 +1,18 @@
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useActions } from 'hooks/useActions';
 import { useLazyGetListPeoplesQuery } from '../../store/people/peopleApi';
+import { createQueryString } from 'utils/createQueryString';
 
 const useResult = () => {
   const router = useRouter();
-  const { query } = router;
-  const currentPage = Number(query.page);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get('page')) || 1;
   const { handleError } = useActions();
 
   const handlePageChange = async (newPage: number) => {
-    router.push({
-      pathname: router.pathname,
-      query: { ...query, page: newPage.toString() }
-    })
+    router.push(pathname + '?' + createQueryString(searchParams, 'page', `${newPage}`))
   };
   const [getPeoples, { data: result, isFetching }] =
     useLazyGetListPeoplesQuery();
