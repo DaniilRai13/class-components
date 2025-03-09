@@ -1,36 +1,32 @@
-import { useRouter } from 'next/router';
+"use client"
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useThemeValues } from 'providers/ThemeProvider/useTheme';
 import { FC, MouseEvent, useEffect } from 'react';
 import { Result } from '../Result/Result';
 import Card from './Card/Card';
 import styles from './Main.module.scss';
 import SelectedItems from './SelectedItems/SelectedItems';
+import { createQueryString } from 'utils/createQueryString';
 
 const Main: FC = () => {
   const router = useRouter()
-  const { query } = router;
-  const currentPage = Number(query.page) || 1;;
-  const currentDetails = query.details;
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const currentPage = Number(searchParams.get("page")) || 1;;
+  const currentDetails = searchParams.get("details");
   const theme = useThemeValues();
 
   const closeDetails = (e: MouseEvent) => {
     if ((e.target as HTMLElement).classList.contains(styles.main)) {
-      router.push({
-        pathname: router.pathname,
-        query: { page: currentPage.toString() },
-      });
+      router.push(pathname + `?page=${currentPage}`);
     }
   };
   useEffect(() => {
-    if (!query.page) {
-      router.push({
-        pathname: router.pathname,
-        query: {
-          page: 1
-        },
-      });
+    if (!searchParams.get("page")) {
+      router.push(pathname + '?' + createQueryString(searchParams, 'page', `1`));
     }
-  }, [query, router]);
+  }, [pathname, router, searchParams]);
   return (
     <main
       className={styles.main}

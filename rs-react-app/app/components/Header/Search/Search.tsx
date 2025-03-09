@@ -1,6 +1,8 @@
+"use client"
+
 import { useLazyGetQueryQuery } from '@/store/people/peopleApi';
 import { useActions } from 'hooks/useActions';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useThemeValues } from 'providers/ThemeProvider/useTheme';
 import { ChangeEvent, FC, useState } from 'react';
 import styles from './Search.module.scss';
@@ -11,9 +13,9 @@ const Search: FC = () => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [trigger, { isFetching }] = useLazyGetQueryQuery();
   const router = useRouter();
+
   const { handleError } = useActions();
   const theme = useThemeValues();
-
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const query = event.target.value.toLowerCase();
@@ -43,12 +45,7 @@ const Search: FC = () => {
         }
         throw new Error('Something went wrong!');
       }
-      router.push({
-        pathname: endpoint,
-        query: {
-          page: 1
-        }
-      });
+      router.push('people/');
     } catch (error) {
       handleError(error instanceof Error ? error.message : 'Unknown error');
     }

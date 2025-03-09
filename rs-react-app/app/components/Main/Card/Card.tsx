@@ -1,4 +1,6 @@
-import { useRouter } from 'next/router';
+"use client"
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 import { useActions } from '../../../hooks/useActions';
 import { useThemeValues } from '../../../providers/ThemeProvider/useTheme';
@@ -7,8 +9,9 @@ import styles from './Card.module.scss';
 
 const Card: FC = () => {
   const router = useRouter()
-  const { query } = router;
-  const detailsId = query.details?.toString();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const detailsId = searchParams.get("details")?.toString();
   const {
     data: people,
     isFetching,
@@ -66,12 +69,7 @@ const Card: FC = () => {
         </div>
         <button
           onClick={() => {
-            router.push({
-              pathname: router.pathname,
-              query: {
-                page: query.page
-              }
-            })
+            router.push(pathname + `?page=${searchParams.get("page")}`)
           }}
         >
           x

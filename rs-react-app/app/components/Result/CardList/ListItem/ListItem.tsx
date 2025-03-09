@@ -1,9 +1,12 @@
+"use client"
+
 import { FC, MouseEvent, useRef } from 'react';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 import { IPeople } from '../../../../types/resultAPI.interface';
 import styles from './ListItem.module.scss';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { createQueryString } from 'utils/createQueryString';
 
 interface IListItem {
   item: IPeople;
@@ -12,16 +15,12 @@ interface IListItem {
 const ListItem: FC<IListItem> = ({ item }) => {
   const ref = useRef<HTMLInputElement>(null);
   const router = useRouter()
-  const { query } = router
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  
   const showDetails = (event: MouseEvent<HTMLDivElement>, detailId: string) => {
     if (event.target === ref.current) return;
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...query,
-        details: detailId
-      }
-    })
+    router.push(pathname + '?' + createQueryString(searchParams, 'details', `${detailId}`));
   };
   const { toggleMarkedPeoples } = useActions();
   const { markedPeoples } = useTypedSelector(({ people }) => people);

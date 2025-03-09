@@ -1,5 +1,7 @@
-import { useRouter } from 'next/router';
-import { FC, ReactNode } from 'react';
+"use client"
+
+import { useRouter } from 'next/navigation';
+import { FC, ReactNode, useEffect } from 'react';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useThemeValues } from '../../providers/ThemeProvider/useTheme';
@@ -25,8 +27,14 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
 
 	const resetError = () => {
 		reset();
-		router.push('/');
 	};
+
+	useEffect(() => {
+		if (!errorMessage) {
+			router.push('people/?page=1');
+		}
+	}, [errorMessage, router]);
+
 	return (
 		<ErrorBoundary error={errorMessage || ''} resetError={resetError}>
 			<div className={styles.app} data-theme={theme === 'light' ? 'light' : 'dark'}>
