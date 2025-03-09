@@ -1,0 +1,72 @@
+@use '@/assets/var.scss' as *;
+
+.item {
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #757272;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: 0.2s all linear;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.01);
+      background-color: #b0afaf1a;
+    }
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px 0;
+    box-sizing: border-box;
+    border-right: 2px solid #757272;
+    color: rgb(41, 135, 217);
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    input {
+      margin-right: 7px;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+
+      @media (max-width: 570px) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    @media (max-width: $desktop-small) {
+      width: 40%;
+    }
+
+    @media (max-width: $tablet-sm) {
+      font-size: 15px;
+    }
+
+    @media (max-width: $mobile) {
+      width: 50%;
+    }
+  }
+
+  .description {
+    flex: 1;
+    font-size: 20px;
+    padding-left: 13px;
+
+    @media (max-width: $tablet-sm) {
+      font-size: 15px;
+    }
+  }
+}
