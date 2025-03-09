@@ -1,0 +1,29 @@
+.result {
+  width: 100%;
+
+  .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+
+    .prev,
+    .next {
+      padding: 8px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: rgba(153, 169, 226, 0.77);
+        cursor: default;
+      }
+
+      @media (hover: hover) {
+        &:hover:not(:disabled) {
+          background-color: rgb(68, 92, 182);
+        }
+      }
+    }
+  }
+}
