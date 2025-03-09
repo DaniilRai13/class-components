@@ -1,3 +1,5 @@
+"use client"
+
 import { FC, ReactNode, useCallback, useMemo, useState } from 'react';
 import { IThemeValuesTypes, ThemeActionsContext, ThemeValuesContext } from './useTheme';
 

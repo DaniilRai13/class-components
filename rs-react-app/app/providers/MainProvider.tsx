@@ -1,3 +1,5 @@
+"use client"
+
 import Layout, { ILayoutProps } from '@/components/Layout/Layout'
 import { store } from '@/store/store'
 import { FC, ReactNode } from 'react'
