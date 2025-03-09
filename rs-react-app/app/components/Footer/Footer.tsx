@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useThemeValues } from '../../providers/ThemeProvider/useTheme';
 import styles from './Footer.module.scss';
+import Link from 'next/link';
 
 const Footer: FC = () => {
   const theme = useThemeValues()
@@ -10,22 +11,22 @@ const Footer: FC = () => {
       <div className={styles.container}>
         <p className={styles.text}>© 2025 Rai Daniil. All rights reserved.</p>
         <div className={styles.links} data-theme={theme === 'light' ? 'light' : 'dark'}>
-          <a
+          <Link
             href="https://t.me/DaniilRai"
             rel="noreferrer"
             target="_blank"
             className={styles.link}
           >
             Telegram
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://github.com/DaniilRai13/"
             rel="noreferrer"
             target="_blank"
             className={styles.link}
           >
             GitHub
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
