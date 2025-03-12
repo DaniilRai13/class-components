@@ -1,0 +1,26 @@
+@use "../../assets/var.scss" as *;
+
+.field {
+	position: relative;
+
+	label {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 25px;
+		box-sizing: border-box;
+		input {
+			margin-top: 7px;
+			border-radius: 15px;
+			padding: 7px 15px;
+			border: 2px solid;
+		}
+	}
+
+	.error {
+		position: absolute;
+		bottom: -18px;
+		left: 5px;
+		font-size: 14px;
+		color: rgb(237, 31, 31);
+	}
+}
